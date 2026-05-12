@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitForge - Soluciones Empresariales Avanzadas</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- 
+        ⚠️ IMPORTANTE: Para enviar emails reales
+        
+        OPCIÓN A: Usa FormSubmit (Recomendado - Deploy a un servidor web)
+        - Requiere: Deployar en GitHub Pages, Netlify o servidor propio
+        - Los formularios ya tienen action="https://formsubmit.co/tu-email.com"
+        
+        OPCIÓN B: Usa EmailJS
+        - Descomenta la línea de abajo
+        - Ve a https://www.emailjs.com/ y crea cuenta
+        - Reemplaza las keys en script.js
+    -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script> -->
+    
+    <!-- 
+        PARA DESARROLLO LOCAL: 
+        Los datos se validarán perfectamente y mostrarán mensaje de éxito.
+        Los datos estarán en la consola (F12 > Console) para verificar.
+    -->
+</head>
+<body>
+    <!-- Navbar Fijo Superior -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-brand">
+                <svg class="navbar-logo" viewBox="0 0 200 200">
+                    <g>
+                        <path d="M40 80 L80 60 L120 80 L100 120 L60 120 Z" fill="#C0C0C0" opacity="0.8"/>
+                        <path d="M100 60 L140 80 L130 140 L90 150 Z" fill="#B026FF"/>
+                        <circle cx="100" cy="100" r="15" fill="#00D9FF"/>
+                    </g>
+                </svg>
+                <span class="navbar-text">BitForge</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Efecto Matrix: Código cayendo -->
+    <div class="matrix-background" id="matrixBackground"></div>
+
+    <div class="container">
+        <!-- Contenido principal -->
+        <div class="content">
+            <!-- Sección Hero -->
+            <section class="hero">
+                <h2 class="hero-title">SOLUCIONES EMPRESARIALES AVANZADAS</h2>
+                <p class="hero-subtitle">Potencia tu negocio con tecnología de vanguardia</p>
+
+                <!-- Carrusel de Servicios -->
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <div class="service-card">
+                                    <div class="service-icon">💾</div>
+                                    <h3>Desarrollo Backend</h3>
+                                    <p>Servidores robustos y escalables con tecnología moderna</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="service-card">
+                                    <div class="service-icon">📈</div>
+                                    <h3>ETL & Datos Masivos</h3>
+                                    <p>Procesa millones de registros con eficiencia</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="service-card">
+                                    <div class="service-icon">⚙️</div>
+                                    <h3>Automatización Empresarial</h3>
+                                    <p>Optimiza procesos y reduce costos operativos</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="service-card">
+                                    <div class="service-icon">🔐</div>
+                                    <h3>Gestión de Accesos</h3>
+                                    <p>Seguridad y control de permisos avanzado</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="service-card">
+                                    <div class="service-icon">✅</div>
+                                    <h3>QA & Testing</h3>
+                                    <p>Garantía de calidad en cada línea de código</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de navegación -->
+                    <button class="carousel-btn carousel-btn-prev" id="carouselPrev">❮</button>
+                    <button class="carousel-btn carousel-btn-next" id="carouselNext">❯</button>
+
+                    <!-- Indicadores -->
+                    <div class="carousel-indicators" id="carouselIndicators"></div>
+                </div>
+            </section>
+
+            <!-- Sección de Enlaces Rápidos -->
+            <section class="quick-links">
+                <h3 class="section-title">ENLACES RÁPIDOS</h3>
+                
+                <div class="links-grid">
+                    <a href="#servicios" class="link-button">
+                        <span class="link-icon">💾</span>
+                        <span class="link-text">Desarrollo Backend</span>
+                    </a>
+                    <a href="#servicios" class="link-button">
+                        <span class="link-icon">📈</span>
+                        <span class="link-text">ETL & Datos Masivos</span>
+                    </a>
+                    <a href="#servicios" class="link-button">
+                        <span class="link-icon">⚙️</span>
+                        <span class="link-text">Automatización Empresarial</span>
+                    </a>
+                    <a href="#servicios" class="link-button">
+                        <span class="link-icon">🔐</span>
+                        <span class="link-text">Gestión de Accesos</span>
+                    </a>
+                    <a href="#servicios" class="link-button">
+                        <span class="link-icon">✅</span>
+                        <span class="link-text">QA & Testing</span>
+                    </a>
+                    <a href="#servicios" class="link-button">
+                        <span class="link-icon">📊</span>
+                        <span class="link-text">Consultoría Técnica</span>
+                    </a>
+                    <a href="#levantamiento" class="link-button">
+                        <span class="link-icon">📋</span>
+                        <span class="link-text">Levantamiento de Requerimientos</span>
+                    </a>
+                    <a href="#contacto" class="link-button">
+                        <span class="link-icon">📞</span>
+                        <span class="link-text">Contacto Directo</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Sección de Servicios -->
+            <section id="servicios" class="services-section">
+                <h3 class="section-title">SERVICIOS PRINCIPALES</h3>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h4>💾 Desarrollo Backend</h4>
+                        <p><strong>Django + Python + PostgreSQL</strong><br>Arquitectura escalable, APIs REST robustas, optimización de queries masivos. Soluciones end-to-end para empresas con alto volumen de transacciones.</p>
+                    </div>
+                    <div class="service-card">
+                        <h4>📈 ETL & Procesamiento de Datos</h4>
+                        <p>Pipelines para cargas masivas, normalización de datos, staging tables, integración de fuentes heterogéneas. Manejo eficiente de millones de registros.</p>
+                    </div>
+                    <div class="service-card">
+                        <h4>⚙️ Automatización Empresarial</h4>
+                        <p><strong>Power Platform + SharePoint + Teams</strong><br>Workflows inteligentes, RPA, integración de sistemas corporativos. Reduce tiempos operativos hasta 70%.</p>
+                    </div>
+                    <div class="service-card">
+                        <h4>🔐 Gestión de Accesos & Seguridad</h4>
+                        <p>Control de roles y permisos, cifrado de datos sensibles, auditoría y cumplimiento normativo. Security-first en cada implementación.</p>
+                    </div>
+                    <div class="service-card">
+                        <h4>✅ QA & Testing Avanzado</h4>
+                        <p>Suite de pruebas exhaustiva, validación de APIs con Postman, bug tracking riguroso, casos de prueba documentados.</p>
+                    </div>
+                    <div class="service-card">
+                        <h4>📊 Consultoría Técnica</h4>
+                        <p>Auditoría de sistemas existentes, roadmap tecnológico, optimización de rendimiento, arquitectura de soluciones enterprise.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Stack Tecnológico -->
+            <section id="stack" class="tech-stack-section">
+                <h3 class="section-title">STACK TECNOLÓGICO</h3>
+                
+                <div class="tech-stack-grid">
+                    <div class="tech-category">
+                        <h4>🎨 Frontend</h4>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3 (Glassmorphism & Neon)</li>
+                            <li>Vanilla JavaScript (ES6+)</li>
+                            <li>Google Fonts (Poppins)</li>
+                        </ul>
+                    </div>
+                    <div class="tech-category">
+                        <h4>⚙️ Backend</h4>
+                        <ul>
+                            <li>Node.js v26.1.0</li>
+                            <li>Express 4.18.2</li>
+                            <li>Resend API (Email)</li>
+                            <li>CORS & Body-Parser Middleware</li>
+                        </ul>
+                    </div>
+                    <div class="tech-category">
+                        <h4>📧 Comunicación</h4>
+                        <ul>
+                            <li>Resend Email Service</li>
+                            <li>HTML Email Templates</li>
+                            <li>Fetch API</li>
+                            <li>RESTful Endpoints</li>
+                        </ul>
+                    </div>
+                    <div class="tech-category">
+                        <h4>🚀 Deployment</h4>
+                        <ul>
+                            <li>Netlify (Frontend)</li>
+                            <li>Node.js Environment (.env)</li>
+                            <li>Git & Version Control</li>
+                            <li>npm Package Management</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Mensaje de Liderazgo -->
+            <section class="leadership-message">
+                <div class="message-header">
+                    <h3>TRANSFORMAMOS IDEAS EN RESULTADOS</h3>
+                </div>
+                <div class="message-content">
+                    <p>
+                        En BitForge, entendemos que cada negocio es único. Por eso ofrecemos soluciones 
+                        personalizadas basadas en tecnología de punta que optimizan tus procesos y aceleran 
+                        tu crecimiento empresarial.
+                    </p>
+                    <p>
+                        Desde desarrollo backend robusto hasta automatización inteligente, nuestro equipo 
+                        de especialistas trabaja contigo para alcanzar objetivos ambiciosos con resultados tangibles.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Sección de Contacto -->
+
+
+            <!-- ============================================
+                 SECCIÓN: LEVANTAMIENTO DE REQUERIMIENTOS
+                 ============================================
+                 Sistema moderno de dos fases para recopilar información del proyecto:
+                 - Fase 1: Formulario inicial rápido
+                 - Fase 2: Encuesta detallada con preguntas específicas
+                 
+                 CONFIGURACIÓN:
+                 - Correo destino: cambiar en script.js (línea ~400)
+                 - Proveedor: EmailJS o FormSubmit
+                 - Backend: preparado para integración futura
+            ============================================ -->
+            <section id="levantamiento" class="requirements-section">
+                <div class="requirements-header">
+                    <h3 class="section-title">SOLICITA TU PROYECTO</h3>
+                    <p class="section-subtitle">Comparte los detalles de tu idea y nosotros te haremos una propuesta personalizada</p>
+                </div>
+
+                <!-- Barra de Progreso -->
+                <div class="progress-wrapper">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressStep">Paso 1 de 2</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                </div>
+
+                <!-- Contenedor del Formulario Multi-paso -->
+                <div class="form-container">
+                    
+                    <!-- FASE 1: FORMULARIO INICIAL -->
+                    <div class="form-phase active" id="phase1">
+                        <div class="phase-content">
+                            <div class="phase-icon">📋</div>
+                            <h4 class="phase-title">Información Inicial</h4>
+                            <p class="phase-description">Cuéntanos sobre ti y tu proyecto</p>
+
+                            <!-- FORMULARIO CONFIGURADO CON FORMSUBMIT.CO
+                                 Los datos se enviarán a: miguel.nahum.oe@gmail.com
+                                 Revisar: https://formsubmit.co/ -->
+                            <form class="requirements-form" id="form-phase1" action="https://formsubmit.co/miguel.nahum.oe@gmail.com" method="POST">
+                                <!-- Campo hidden para redirigir después del envío -->
+                                <input type="hidden" name="_next" value="https://bitforge.com/gracias">
+                                <!-- Campo hidden para el asunto -->
+                                <input type="hidden" name="_subject" value="Nueva Solicitud de Proyecto - BitForge">
+                                
+                                <div class="form-group">
+                                    <label for="nombre">Nombre Completo *</label>
+                                    <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez" required>
+                                    <span class="error-message" id="error-nombre"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="empresa">Empresa/Emprendimiento *</label>
+                                    <input type="text" id="empresa" name="empresa" placeholder="Mi Empresa" required>
+                                    <span class="error-message" id="error-empresa"></span>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="correo">Correo Electrónico *</label>
+                                        <input type="email" id="correo" name="correo" placeholder="tu@empresa.com" required>
+                                        <span class="error-message" id="error-correo"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="telefono">Teléfono *</label>
+                                        <input type="tel" id="telefono" name="telefono" placeholder="+56 9 XXXX XXXX" required>
+                                        <span class="error-message" id="error-telefono"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tipo-proyecto">Tipo de Proyecto *</label>
+                                    <select id="tipo-proyecto" name="tipo_proyecto" required>
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="sitio-web">Sitio Web</option>
+                                        <option value="ecommerce">E-commerce</option>
+                                        <option value="app-movil">Aplicación Móvil</option>
+                                        <option value="automatizacion">Automatización Empresarial</option>
+                                        <option value="integracion">Integración de Sistemas</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                    <span class="error-message" id="error-tipo"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mensaje-inicial">Mensaje Inicial *</label>
+                                    <textarea id="mensaje-inicial" name="mensaje_inicial" placeholder="Cuéntame sobre tu proyecto, tus objetivos y expectativas..." rows="4" required></textarea>
+                                    <span class="error-message" id="error-mensaje"></span>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn-next" id="btn-next-phase1">
+                                        Siguiente <span class="icon-arrow">→</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- FASE 2: ENCUESTA DETALLADA -->
+                    <div class="form-phase" id="phase2">
+                        <div class="phase-content">
+                            <div class="phase-icon">📊</div>
+                            <h4 class="phase-title">Detalles del Proyecto</h4>
+                            <p class="phase-description">Información específica para optimizar tu solución</p>
+
+                            <form class="requirements-form" id="form-phase2" action="https://formsubmit.co/miguel.nahum.oe@gmail.com" method="POST">
+                                <!-- Campo hidden para el asunto -->
+                                <input type="hidden" name="_subject" value="Encuesta Completa - Levantamiento de Requerimientos">
+                                <!-- Campo hidden para datos de fase 1 -->
+                                <input type="hidden" name="_cc" value="miguel.nahum.oe@gmail.com">
+                                
+                                <!-- Sección: Tipo de Proyecto y Objetivos -->
+                                <div class="form-section">
+                                    <h5 class="section-label">🎯 Objetivos del Proyecto</h5>
+                                    
+                                    <div class="form-group">
+                                        <label for="objetivo-principal">¿Cuál es el objetivo principal? *</label>
+                                        <select id="objetivo-principal" name="objetivo_principal" required>
+                                            <option value="">Selecciona un objetivo</option>
+                                            <option value="presencia-digital">Establecer presencia digital</option>
+                                            <option value="vender-online">Vender productos/servicios online</option>
+                                            <option value="optimizar-procesos">Optimizar procesos internos</option>
+                                            <option value="mejorar-atencion">Mejorar atención al cliente</option>
+                                            <option value="analizar-datos">Análisis y reportes de datos</option>
+                                            <option value="varios">Varios objetivos</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Sección: Tecnología Actual -->
+                                <div class="form-section">
+                                    <h5 class="section-label">🌐 Tecnología e Infraestructura</h5>
+                                    
+                                    <div class="form-group">
+                                        <label>¿Tienes dominio registrado? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="dominio" value="si" required>
+                                                <span>Sí, ya tengo</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="dominio" value="no">
+                                                <span>No, necesito uno</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>¿Tienes hosting contratado? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="hosting" value="si" required>
+                                                <span>Sí, ya tengo</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="hosting" value="no">
+                                                <span>No, necesito uno</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>¿Tienes logo diseñado? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="logo" value="si" required>
+                                                <span>Sí, ya tengo</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="logo" value="no">
+                                                <span>No, necesito diseño</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sección: Funcionalidades -->
+                                <div class="form-section">
+                                    <h5 class="section-label">⚙️ Funcionalidades Necesarias</h5>
+                                    
+                                    <div class="form-group">
+                                        <label>¿Necesitas e-commerce (carrito, pagos)? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="ecommerce" value="si" required>
+                                                <span>Sí</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="ecommerce" value="no">
+                                                <span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>¿Necesitas panel administrador? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="admin_panel" value="si" required>
+                                                <span>Sí</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="admin_panel" value="no">
+                                                <span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>¿Necesitas sistema de usuarios y roles? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="usuarios_roles" value="si" required>
+                                                <span>Sí</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="usuarios_roles" value="no">
+                                                <span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>¿Necesitas integración con WhatsApp? *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="whatsapp" value="si" required>
+                                                <span>Sí</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="whatsapp" value="no">
+                                                <span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sección: Presupuesto y Tiempo -->
+                                <div class="form-section">
+                                    <h5 class="section-label">💰 Presupuesto y Tiempo</h5>
+                                    
+                                    <div class="form-group">
+                                        <label for="presupuesto">Presupuesto Estimado (CLP) *</label>
+                                        <select id="presupuesto" name="presupuesto" required>
+                                            <option value="">Selecciona un rango</option>
+                                            <option value="1-3-millones">$1M - $3M</option>
+                                            <option value="3-5-millones">$3M - $5M</option>
+                                            <option value="5-10-millones">$5M - $10M</option>
+                                            <option value="10-20-millones">$10M - $20M</option>
+                                            <option value="20-mas">$20M+</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="fecha-entrega">Fecha Estimada de Entrega *</label>
+                                        <input type="text" id="fecha-entrega" name="fecha_entrega" placeholder="Ej: 2-3 meses" required>
+                                        <span class="help-text">Ej: ASAP, 1 mes, 2-3 meses, 6 meses, etc.</span>
+                                    </div>
+                                </div>
+
+                                <!-- Sección: Referencias y Comentarios -->
+                                <div class="form-section">
+                                    <h5 class="section-label">📚 Referencias y Detalles Adicionales</h5>
+                                    
+                                    <div class="form-group">
+                                        <label for="referencias">¿Conoces sitios similares? (Links de referencia)</label>
+                                        <textarea id="referencias" name="referencias" placeholder="Pega aquí links de sitios o apps que te gusten. Nos ayuda a entender tu visión..." rows="3"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comentarios">Comentarios Adicionales</label>
+                                        <textarea id="comentarios" name="comentarios" placeholder="Cualquier otro detalle importante que quieras mencionar..." rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn-back" id="btn-back-phase2">
+                                        <span class="icon-arrow">←</span> Anterior
+                                    </button>
+                                    <button type="submit" class="btn-submit" id="btn-submit">
+                                        <span class="loader-icon" id="loader-icon">📨</span> Enviar Solicitud
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- CONFIRMACIÓN DE ENVÍO -->
+                    <div class="form-phase" id="phase-success">
+                        <div class="phase-content success-content">
+                            <div class="success-icon">✨</div>
+                            <h4 class="phase-title">¡Solicitud Enviada!</h4>
+                            <p class="phase-description">Hemos recibido tu información correctamente</p>
+                            
+                            <div class="success-message">
+                                <p>Pronto te enviaremos un <strong>link con una encuesta detallada</strong> para completar el levantamiento de requerimientos.</p>
+                                <p>Mientras tanto, podemos:</p>
+                                <ul>
+                                    <li>📧 Enviarte una propuesta inicial</li>
+                                    <li>📞 Agendar una llamada para detalles</li>
+                                    <li>💡 Sugerencias sobre tu proyecto</li>
+                                </ul>
+                            </div>
+
+                            <div class="success-actions">
+                                <a href="mailto:miguel.nahum.oe@gmail.com?subject=Seguimiento%20a%20solicitud%20de%20proyecto" class="btn-contact">
+                                    Contáctame via Email
+                                </a>
+                                <button type="button" class="btn-new-request" id="btn-new-request">
+                                    Enviar Otra Solicitud
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 BitForge - Soluciones Empresariales Avanzadas. Todos los derechos reservados.</p>
+        <p>🔧 Transformamos tu visión empresarial en realidad</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
