@@ -1,0 +1,18 @@
+# No ignorar archivos estáticos
+!index.html
+!styles.css
+!script.js
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+
+# Ignorar archivos de desarrollo
+.git
+.gitignore
+node_modules
+npm-debug.log
+yarn-error.log
+.env.local
+.env.*.local

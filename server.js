@@ -11,8 +11,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Servir archivos estáticos desde el directorio actual
-app.use(express.static(path.join(__dirname)));
+// Servir archivos estáticos desde el directorio de trabajo
+const staticDir = process.env.NODE_ENV === 'production' ? process.cwd() : path.join(__dirname);
+app.use(express.static(staticDir));
 
 // DEBUG: Mostrar variables cargadas
 console.log('📋 VARIABLES CARGADAS:');
@@ -113,7 +114,7 @@ app.post('/api/enviar-solicitud', async (req, res) => {
 
 // Ruta raíz - Servir el HTML principal
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(staticDir, 'index.html'));
 });
 
 // Iniciar servidor
