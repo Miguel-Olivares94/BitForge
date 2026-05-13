@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname)); // Servir archivos estáticos (HTML, CSS, JS)
 
 // DEBUG: Mostrar variables cargadas
 console.log('📋 VARIABLES CARGADAS:');
@@ -16,8 +17,11 @@ console.log('   RESEND_API_KEY:', process.env.RESEND_API_KEY ? '✓ Configurado'
 console.log('   RECIPIENT_EMAIL:', process.env.RECIPIENT_EMAIL);
 console.log('   PORT:', process.env.PORT);
 
-// Inicializar Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Inicializar Resend solo si existe la API key
+let resend = null;
+if (process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+}
 
 // Ruta para enviar solicitudes
 app.post('/api/enviar-solicitud', async (req, res) => {
@@ -64,6 +68,16 @@ app.post('/api/enviar-solicitud', async (req, res) => {
         `;
 
         // Enviar correo con Resend
+        if (!resend) {
+            // Si no hay Resend API key configurada, retornar éxito pero con advertencia
+            console.log('⚠️  RESEND_API_KEY no configurada, pero la solicitud se procesó');
+            return res.status(200).json({
+                success: true,
+                message: '✅ Solicitud procesada (email no configurado)',
+                warning: 'RESEND_API_KEY no está configurada en el servidor'
+            });
+        }
+
         const result = await resend.emails.send({
             from: 'BitForge <onboarding@resend.dev>',
             to: process.env.RECIPIENT_EMAIL,
@@ -94,14 +108,9 @@ app.post('/api/enviar-solicitud', async (req, res) => {
     }
 });
 
-// Ruta de prueba
+// Ruta raíz - Servir el HTML principal
 app.get('/', (req, res) => {
-    res.json({
-        status: '✅ Servidor BitForge Backend activo',
-        endpoints: {
-            enviar: 'POST /api/enviar-solicitud'
-        }
-    });
+    res.sendFile(__dirname + '/index.html');
 });
 
 // Iniciar servidor
