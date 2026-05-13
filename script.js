@@ -1,12 +1,12 @@
-// ============================================
+﻿// ============================================
 // FUNCIONALIDAD INTERACTIVA COMPLETA
 // ============================================
 
 // ============================================
-// EFECTO MATRIX - CÓDIGO CAYENDO
+// EFECTO MATRIX - CÃ“DIGO CAYENDO
 // ============================================
 
-const MATRIX_CHARS = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+const MATRIX_CHARS = '01ã‚¢ã‚¤ã‚¦ã‚¨ã‚ªã‚«ã‚­ã‚¯ã‚±ã‚³ã‚µã‚·ã‚¹ã‚»ã‚½ã‚¿ãƒãƒ„ãƒ†ãƒˆãƒŠãƒ‹ãƒŒãƒãƒŽãƒãƒ’ãƒ•ãƒ˜ãƒ›ãƒžãƒŸãƒ ãƒ¡ãƒ¢ãƒ¤ãƒ¦ãƒ¨ãƒ©ãƒªãƒ«ãƒ¬ãƒ­ãƒ¯ãƒ²ãƒ³';
 
 function inicializarMatrix() {
     const background = document.getElementById('matrixBackground');
@@ -34,7 +34,7 @@ function inicializarMatrix() {
 
         background.appendChild(column);
 
-        // Regenerar columnas después de desaparecer - intervalo más largo
+        // Regenerar columnas despuÃ©s de desaparecer - intervalo mÃ¡s largo
         const regenerateInterval = setInterval(() => {
             if (!column.parentElement) {
                 clearInterval(regenerateInterval);
@@ -58,11 +58,11 @@ function inicializarMatrix() {
             }
 
             background.appendChild(newColumn);
-        }, 40000); // Más tiempo entre regeneraciones
+        }, 40000); // MÃ¡s tiempo entre regeneraciones
     }
 }
 
-// Agregar efectos a los botones de enlaces rápidos
+// Agregar efectos a los botones de enlaces rÃ¡pidos
 document.querySelectorAll('.link-button').forEach(button => {
     button.addEventListener('mouseenter', function(e) {
         const icon = this.querySelector('.link-icon');
@@ -104,13 +104,13 @@ if (contactForm) {
         const tipo = this.querySelector('select').value;
         
         if (nombre && email && tipo !== 'Selecciona tipo de proyecto') {
-            // Simular envío
+            // Simular envÃ­o
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = '✓ Enviado';
+            submitBtn.textContent = 'âœ“ Enviado';
             submitBtn.style.background = 'linear-gradient(135deg, #FFB84D, #C0C0C0)';
             
-            // Resetear después de 2 segundos
+            // Resetear despuÃ©s de 2 segundos
             setTimeout(() => {
                 submitBtn.textContent = originalText;
                 submitBtn.style.background = 'linear-gradient(135deg, #FF8C00, #FFB84D)';
@@ -131,7 +131,7 @@ window.addEventListener('mousemove', (e) => {
     }
 });
 
-// Animación de carga de la página
+// AnimaciÃ³n de carga de la pÃ¡gina
 window.addEventListener('load', function() {
     document.body.style.animation = 'fadeIn 0.8s ease-in';
     
@@ -163,7 +163,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     behavior: 'smooth'
                 });
                 
-                // Añadir efecto visual
+                // AÃ±adir efecto visual
                 target.style.animation = 'none';
                 setTimeout(() => {
                     target.style.animation = 'highlightSection 1s ease-out';
@@ -173,7 +173,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Efecto de scroll para aparición de elementos
+// Efecto de scroll para apariciÃ³n de elementos
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -195,7 +195,7 @@ document.querySelectorAll('.service-card, .tech-category').forEach(el => {
     observer.observe(el);
 });
 
-// Agregar animación de scroll al header
+// Agregar animaciÃ³n de scroll al header
 let lastScrollTop = 0;
 window.addEventListener('scroll', function() {
     let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -230,33 +230,33 @@ function supports3DTransforms() {
     return false;
 }
 
-// Log de información
+// Log de informaciÃ³n
 console.log('%cHarpers Co.%c', 'font-size: 24px; color: #ff1493; font-weight: bold;', 'color: #87ceeb;');
-console.log('%cGuía Práctica para Empleados', 'color: #da70d6; font-weight: bold;');
-console.log('%c3D Transforms disponibles:', supports3DTransforms() ? 'Sí ✓' : 'No ✗', 'color: #00d4ff;');
+console.log('%cGuÃ­a PrÃ¡ctica para Empleados', 'color: #da70d6; font-weight: bold;');
+console.log('%c3D Transforms disponibles:', supports3DTransforms() ? 'SÃ­ âœ“' : 'No âœ—', 'color: #00d4ff;');
 
 // ============================================
 // LEVANTAMIENTO DE REQUERIMIENTOS - FUNCIONALIDAD COMPLETA
 // ============================================
 // 
-// CONFIGURACIÓN IMPORTANTE:
-// Para integrar con email, elige una opción:
+// CONFIGURACIÃ“N IMPORTANTE:
+// Para integrar con email, elige una opciÃ³n:
 // 
-// OPCIÓN 1: EmailJS (Recomendado)
+// OPCIÃ“N 1: EmailJS (Recomendado)
 // 1. Ve a https://www.emailjs.com/
-// 2. Crea una cuenta y obtén: PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID
-// 3. Reemplaza en la línea ~550: emailjs.send(SERVICE_ID, TEMPLATE_ID, ...)
-// 4. Descomentar la línea: <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+// 2. Crea una cuenta y obtÃ©n: PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID
+// 3. Reemplaza en la lÃ­nea ~550: emailjs.send(SERVICE_ID, TEMPLATE_ID, ...)
+// 4. Descomentar la lÃ­nea: <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
 //
-// OPCIÓN 2: FormSubmit (Más simple)
+// OPCIÃ“N 2: FormSubmit (MÃ¡s simple)
 // 1. Cambia en form-phase1: action="https://formsubmit.co/tu@email.com"
 // 2. Cambia en form-phase2: action="https://formsubmit.co/tu@email.com"
 //
-// OPCIÓN 3: Backend Propio
+// OPCIÃ“N 3: Backend Propio
 // Reemplaza la URL en enviarSolicitud() con tu endpoint backend
-// El backend recibirá los datos en JSON y puede:
+// El backend recibirÃ¡ los datos en JSON y puede:
 // - Guardar en base de datos
-// - Enviar email automático
+// - Enviar email automÃ¡tico
 // - Crear URL de encuesta personalizada
 // ============================================
 
@@ -289,7 +289,7 @@ function inicializarCarrusel() {
         indicatorsContainer.appendChild(indicator);
     }
 
-    // Botones de navegación
+    // Botones de navegaciÃ³n
     document.getElementById('carouselPrev').addEventListener('click', () => previousSlide());
     document.getElementById('carouselNext').addEventListener('click', () => nextSlide());
 
@@ -346,7 +346,7 @@ function inicializarLevantamientoRequerimientos() {
 
     if (formPhase2) {
         formPhase2.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenir envío nativo
+            e.preventDefault(); // Prevenir envÃ­o nativo
             if (validarFase2()) {
                 enviarSolicitudCompleta(); // Enviar al servidor Node.js
             }
@@ -359,13 +359,13 @@ function inicializarLevantamientoRequerimientos() {
         });
     }
 
-    // Validación en tiempo real
+    // ValidaciÃ³n en tiempo real
     agregarValidacionTiempoReal();
 }
 
 /**
  * Valida los campos del formulario Fase 1
- * @returns {boolean} true si todos los campos son válidos
+ * @returns {boolean} true si todos los campos son vÃ¡lidos
  */
 function validarFase1() {
     const nombre = document.getElementById('nombre');
@@ -401,15 +401,15 @@ function validarFase1() {
         mostrarError('correo', 'El correo es requerido');
         esValido = false;
     } else if (!validarFormatoEmail(correo.value)) {
-        mostrarError('correo', 'Ingresa un correo válido');
+        mostrarError('correo', 'Ingresa un correo vÃ¡lido');
         esValido = false;
     } else {
         limpiarError('correo');
     }
 
-    // Validar teléfono
+    // Validar telÃ©fono
     if (!telefono.value.trim()) {
-        mostrarError('telefono', 'El teléfono es requerido');
+        mostrarError('telefono', 'El telÃ©fono es requerido');
         esValido = false;
     } else {
         limpiarError('telefono');
@@ -439,7 +439,7 @@ function validarFase1() {
 
 /**
  * Valida los campos del formulario Fase 2
- * @returns {boolean} true si todos los campos son válidos
+ * @returns {boolean} true si todos los campos son vÃ¡lidos
  */
 function validarFase2() {
     const objetivoPrincipal = document.getElementById('objetivo-principal');
@@ -504,8 +504,8 @@ function validarFase2() {
 }
 
 /**
- * Cambia entre fases del formulario con animación
- * @param {number} phase - Número de fase a mostrar
+ * Cambia entre fases del formulario con animaciÃ³n
+ * @param {number} phase - NÃºmero de fase a mostrar
  */
 function cambiarFase(phase) {
     if (phase < 1 || phase > totalPhases + 1) return;
@@ -517,7 +517,7 @@ function cambiarFase(phase) {
         phaseActual.classList.remove('active');
     }
 
-    // Pequeño delay para animación
+    // PequeÃ±o delay para animaciÃ³n
     setTimeout(() => {
         currentPhase = phase;
 
@@ -531,7 +531,7 @@ function cambiarFase(phase) {
         // Actualizar barra de progreso
         actualizarProgreso();
 
-        // Scroll a la sección
+        // Scroll a la secciÃ³n
         setTimeout(() => {
             const sectionRequirements = document.querySelector('.requirements-section');
             if (sectionRequirements && window.innerWidth < 768) {
@@ -631,7 +631,7 @@ function mostrarErrorFecha() {
 /**
  * Valida el formato de email
  * @param {string} email - Email a validar
- * @returns {boolean} true si es válido
+ * @returns {boolean} true si es vÃ¡lido
  */
 function validarFormatoEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -639,7 +639,7 @@ function validarFormatoEmail(email) {
 }
 
 /**
- * Añade validación en tiempo real a los campos
+ * AÃ±ade validaciÃ³n en tiempo real a los campos
  */
 function agregarValidacionTiempoReal() {
     const campos = ['nombre', 'empresa', 'correo', 'telefono', 'tipo-proyecto', 'mensaje-inicial'];
@@ -690,10 +690,10 @@ function recopilarDatos() {
 }
 
 /**
- * Envía la solicitud completa
- * CONFIGURACIÓN: Usa servidor Node.js backend
+ * EnvÃ­a la solicitud completa
+ * CONFIGURACIÃ“N: Usa servidor Node.js backend
  * URL del servidor: http://localhost:3000/api/enviar-solicitud (desarrollo)
- *                   https://tu-url-render.onrender.com/api/enviar-solicitud (producción)
+ *                   https://tu-url-render.onrender.com/api/enviar-solicitud (producciÃ³n)
  */
 function enviarSolicitudCompleta() {
     const btnSubmit = document.getElementById('btn-submit');
@@ -701,16 +701,16 @@ function enviarSolicitudCompleta() {
     // Recopilar todos los datos
     const datos = recopilarDatos();
 
-    console.log('📨 Enviando datos al servidor Node.js:', datos);
+    console.log('ðŸ“¨ Enviando datos al servidor Node.js:', datos);
 
-    // URL del servidor (cambiar según ambiente)
+    // URL del servidor (cambiar segÃºn ambiente)
     const SERVIDOR_URL = 'https://89g07sgq-3000.brs.devtunnels.ms/api/enviar-solicitud'; // DevTunnel - Remoto
     // const SERVIDOR_URL = 'http://localhost:3000/api/enviar-solicitud'; // Desarrollo local
-    // const SERVIDOR_URL = 'https://tu-render-url.onrender.com/api/enviar-solicitud'; // Producción
+    // const SERVIDOR_URL = 'https://tu-render-url.onrender.com/api/enviar-solicitud'; // ProducciÃ³n
 
-    // Mostrar estado de envío
+    // Mostrar estado de envÃ­o
     btnSubmit.disabled = true;
-    btnSubmit.textContent = '⏳ Enviando...';
+    btnSubmit.textContent = 'â³ Enviando...';
 
     // Enviar datos al servidor
     fetch(SERVIDOR_URL, {
@@ -728,41 +728,41 @@ function enviarSolicitudCompleta() {
         return response.json();
     })
     .then(data => {
-        console.log('✅ Solicitud enviada exitosamente:', data);
+        console.log('âœ… Solicitud enviada exitosamente:', data);
         
-        // Mostrar pantalla de éxito
+        // Mostrar pantalla de Ã©xito
         cambiarFase(3);
         btnSubmit.disabled = false;
-        btnSubmit.textContent = '📨 Enviar Solicitud';
+        btnSubmit.textContent = 'ðŸ“¨ Enviar Solicitud';
     })
     .catch(error => {
-        console.error('❌ Error al enviar:', error);
+        console.error('âŒ Error al enviar:', error);
         
         // Mostrar error al usuario
-        alert('❌ Error al enviar la solicitud. Intenta de nuevo.\n\nError: ' + error.message);
+        alert('âŒ Error al enviar la solicitud. Intenta de nuevo.\n\nError: ' + error.message);
         
         btnSubmit.disabled = false;
-        btnSubmit.textContent = '📨 Enviar Solicitud';
+        btnSubmit.textContent = 'ðŸ“¨ Enviar Solicitud';
     });
 }
 
 function mostrarExito() {
     const btnSubmit = document.getElementById('btn-submit');
     const loaderIcon = document.getElementById('loader-icon');
-    loaderIcon.textContent = '✨';
+    loaderIcon.textContent = 'âœ¨';
     setTimeout(() => {
         cambiarFase(3);
         btnSubmit.classList.remove('loading');
-        console.log('✅ ¡Solicitud procesada con éxito!');
+        console.log('âœ… Â¡Solicitud procesada con Ã©xito!');
     }, 1500);
 }
 
 /**
- * Envía los datos al backend
+ * EnvÃ­a los datos al backend
  * CONFIGURABLE: Reemplaza 'tu-backend.com' con tu URL real
  */
 function enviarAlBackend(datos, btnSubmit, loaderIcon) {
-    // URL DEL BACKEND - CAMBIAR AQUÍ CON TU URL REAL
+    // URL DEL BACKEND - CAMBIAR AQUÃ CON TU URL REAL
     const backendURL = 'https://tu-backend.com/api/solicitudes';
     // O LOCALHOST para desarrollo: 'http://localhost:3000/api/solicitudes'
 
@@ -785,8 +785,8 @@ function enviarAlBackend(datos, btnSubmit, loaderIcon) {
     })
     .catch(error => {
         console.error('Error al enviar:', error);
-        // Si falla, simular éxito (comentar en producción)
-        console.log('Simulando envío exitoso (sin backend)');
+        // Si falla, simular Ã©xito (comentar en producciÃ³n)
+        console.log('Simulando envÃ­o exitoso (sin backend)');
         mostrarPantallaExito(btnSubmit, loaderIcon);
     });
 }
@@ -796,17 +796,22 @@ function enviarAlBackend(datos, btnSubmit, loaderIcon) {
 // ============================================
 
 /**
- * SISTEMA DE CHAT ESTRATÉGICO CON CALIFICACIÓN DE LEADS
+ * SISTEMA DE CHAT ESTRATÃ‰GICO CON CALIFICACIÃ“N DE LEADS
  * 
  * Estrategia de venta:
  * 1. Pitch inicial (posicionar valor)
- * 2. Calificación por presupuesto
+ * 2. CalificaciÃ³n por presupuesto
  * 3. Descubrimiento de problema (pain point)
- * 4. Soluciones específicas
+ * 4. Soluciones especÃ­ficas
  * 5. Timeline y contacto
  * 6. Cierre fuerte con CTA
  */
 
+/**
+ * CHATBOT AGENTE DE VENTAS EXPERTO - VERSIÃ“N 2.0
+ * Sistema conversacional inteligente para toma de requerimientos
+ * Especializado en sistemas, software, CRM, ERP, ecommerce, automatizaciones
+ */
 class ChatBot {
     constructor() {
         // Referencias a elementos DOM
@@ -819,132 +824,65 @@ class ChatBot {
         this.chatSendBtn = document.getElementById('chat-send-btn');
         this.chatOptions = document.getElementById('chat-options');
         
-        // Estado del chat
+        // Estado
         this.isOpen = false;
-        this.currentStep = 0;
-        this.conversationData = {};
-        this.selectedOptions = [];
+        this.currentPhase = 'greeting';
+        this.conversationHistory = []; // Historial de todo lo que el usuario dice
+        this.conversationData = {
+            empresa: '',
+            tamaÃ±o: '',
+            industria: '',
+            problemasPrincipales: [],
+            procesosActuales: '',
+            procesosAAutomatizar: [],
+            funcionesNecesarias: [],
+            usuariosEstimados: 0,
+            tiposUsuarios: [],
+            reportesNecesarios: [],
+            integraciÃ³nRequerida: false,
+            sistemasExistentes: [],
+            presupuesto: '',
+            timeline: '',
+            nombre: '',
+            email: '',
+            telefono: '',
+            notasAdicionales: ''
+        };
         
-        // FLUJO ESTRATÉGICO DE VENTA Y CALIFICACIÓN
-        this.steps = [
-            {
-                question: '🚀 ¡Hola! Soy el asistente de BitForge.\n\nEspecializamos en soluciones empresariales avanzadas: e-commerce, sistemas personalizados, CRM y plataformas a medida.\n\n¿Tienes un proyecto en mente?',
-                field: 'intro',
-                type: 'buttons',
-                options: ['Sí, tengo un proyecto', 'Solo explorando'],
-                validation: (value) => true,
-                action: (value) => {
-                    if (value === 'Solo explorando') {
-                        // Calificar como "exploring"
-                        return false; // Parar aquí
-                    }
-                    return true;
-                }
-            },
-            {
-                question: '📊 Perfecto. Primero, una pregunta clave:\n\n¿Cuál es tu presupuesto aproximado para este proyecto?',
-                field: 'presupuesto',
-                type: 'buttons',
-                options: ['$3M - $10M', '$10M - $25M', '$25M - $50M', '$50M+', 'Aún no lo definimos'],
-                validation: (value) => value.length > 0
-            },
-            {
-                question: '💼 Excelente. Ahora cuéntame:\n\n¿Qué tipo de solución necesitas?',
-                field: 'tipo_proyecto',
-                type: 'buttons',
-                options: ['Tienda Online / E-commerce', 'Sistema de Gestión', 'Plataforma SaaS', 'CRM/Gestión de Clientes', 'Aplicación Móvil', 'Landing Page / Web Corporativa', 'Otra solución'],
-                validation: (value) => value.length > 0
-            },
-            {
-                question: '🎯 Muy bien. Cuéntame el panorama:\n\n¿Cuál es el **principal desafío** o **objetivo** que esperas resolver con este proyecto?',
-                field: 'problema_principal',
-                type: 'text',
-                placeholder: 'Ej: Necesito vender online, automatizar procesos, mejorar eficiencia...',
-                validation: (value) => value.trim().length >= 15
-            },
-            {
-                question: '⚙️ Perfecto. Ahora necesitamos detalles:\n\n¿Cuáles de estas funcionalidades son **imprescindibles**?',
-                field: 'funcionalidades',
-                type: 'checkboxes',
-                options: [
-                    'Pasarela de pago integrada',
-                    'Integración con tu ERP/sistemas actuales',
-                    'Panel administrativo avanzado',
-                    'Reportes y analytics',
-                    'Autenticación y permisos de usuarios',
-                    'Móvil (App o responsive)',
-                    'Escalabilidad (muchos usuarios/datos)',
-                    'Seguridad avanzada (compliance)',
-                    'Integración con terceros (APIs)',
-                    'Soporte técnico dedicado'
-                ],
-                validation: (value) => value.length > 0
-            },
-            {
-                question: '⏰ Urgencia es importante.\n\n¿Cuándo necesitas que el proyecto esté en producción?',
-                field: 'timeline',
-                type: 'buttons',
-                options: ['ASAP (1-2 meses)', '2-3 meses', '3-6 meses', '6-12 meses', 'Flexible'],
-                validation: (value) => value.length > 0
-            },
-            {
-                question: '👤 Ahora sí, necesito tu información de contacto.\n\n¿Cuál es tu nombre?',
-                field: 'nombre',
-                type: 'text',
-                placeholder: 'Tu nombre completo',
-                validation: (value) => value.trim().length >= 2
-            },
-            {
-                question: '📧 ¿Tu correo electrónico?',
-                field: 'correo',
-                type: 'email',
-                placeholder: 'tu@email.com',
-                validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            },
-            {
-                question: '📱 ¿Tu WhatsApp o teléfono? (para contacto rápido)',
-                field: 'telefono',
-                type: 'text',
-                placeholder: '+56 9 XXXX XXXX',
-                validation: (value) => value.trim().length >= 7
-            },
-            {
-                question: '💡 Última pregunta:\n\n¿Hay algo específico sobre tu proyecto que debamos saber? (Referencias, diseños existentes, integraciones especiales, etc.)',
-                field: 'notas_adicionales',
-                type: 'text',
-                placeholder: 'Cuéntanos detalles adicionales (opcional)',
-                validation: (value) => true // Campo opcional
-            }
-        ];
+        this.detectedNeeds = {
+            erp: false,
+            crm: false,
+            ecommerce: false,
+            automatizacion: false,
+            integracion: false,
+            dashboard: false,
+            appMobile: false,
+            ia: false,
+            admin: false,
+            pagos: false,
+            inventario: false,
+            rrhh: false
+        };
         
-        // Inicializar listeners
+        // Inicializar
         this.initializeListeners();
     }
     
-    /**
-     * Inicializar event listeners
-     */
     initializeListeners() {
         this.chatToggleBtn.addEventListener('click', () => this.toggleChat());
         this.chatCloseBtn.addEventListener('click', () => this.closeChat());
-        this.chatSendBtn.addEventListener('click', () => this.handleUserInput());
+        this.chatSendBtn.addEventListener('click', () => this.handleInput());
         this.chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                this.handleUserInput();
+                this.handleInput();
             }
         });
     }
     
-    /**
-     * Abrir/cerrar chat
-     */
     toggleChat() {
-        if (this.isOpen) {
-            this.closeChat();
-        } else {
-            this.openChat();
-        }
+        if (this.isOpen) this.closeChat();
+        else this.openChat();
     }
     
     openChat() {
@@ -952,15 +890,10 @@ class ChatBot {
         this.chatWindow.classList.remove('hidden');
         this.chatToggleBtn.style.display = 'none';
         
-        // Si es la primera vez, mostrar primer mensaje
-        if (this.currentStep === 0 && this.chatMessages.children.length === 0) {
-            setTimeout(() => this.showStep(0), 300);
+        // Mostrar saludo si es primera vez
+        if (this.chatMessages.children.length === 0) {
+            this.showGreeting();
         }
-        
-        // Enfocar en el input
-        setTimeout(() => {
-            if (!this.chatInput.disabled) this.chatInput.focus();
-        }, 300);
     }
     
     closeChat() {
@@ -969,40 +902,429 @@ class ChatBot {
         this.chatToggleBtn.style.display = 'flex';
     }
     
-    /**
-     * Mostrar paso actual
-     */
-    showStep(stepIndex) {
-        const step = this.steps[stepIndex];
+    // ============================================
+    // FASES DEL CHAT
+    // ============================================
+    
+    showGreeting() {
+        this.addMessage('ðŸ‘‹ Â¡Hola! Soy Lucas, el agente de ventas de BitForge.\n\nSomos una empresa especializada en soluciones empresariales: sistemas web, CRM, ERP, ecommerce, automatizaciones e inteligencia artificial para negocios.\n\nÂ¿Tienes un proyecto o necesidad que quieras resolver? ðŸš€', 'bot');
         
-        // Agregar mensaje del bot
-        this.addMessage(step.question, 'bot');
+        this.showOptions(['SÃ­, tengo un proyecto', 'Solo explorando / ConsultarÃ­a'], 'greeting');
+    }
+    
+    handleOption(option, phase) {
+        this.addMessage(option, 'user');
         
-        // Mostrar opciones según el tipo
-        if (step.type === 'buttons') {
-            this.showButtonOptions(step.options, step.field);
-            this.chatInput.style.display = 'none';
-            this.chatSendBtn.style.display = 'none';
-        } else if (step.type === 'checkboxes') {
-            this.showCheckboxOptions(step.options, step.field);
-            this.chatInput.style.display = 'none';
-            this.chatSendBtn.style.display = 'block';
-            this.chatSendBtn.textContent = '✓ Continuar';
-        } else {
-            this.chatOptions.classList.add('hidden');
-            this.chatInput.style.display = 'block';
-            this.chatSendBtn.style.display = 'block';
-            this.chatSendBtn.textContent = '→ Enviar';
-            this.chatInput.value = '';
-            this.chatInput.placeholder = step.placeholder || 'Escribe tu respuesta...';
-            this.chatInput.focus();
+        if (phase === 'greeting') {
+            if (option === 'Solo explorando / ConsultarÃ­a') {
+                this.addMessage('Entendido. Sin problema, puedo ayudarte a explorar. De todas formas, si necesitas algo especÃ­fico en el futuro, estarÃ© aquÃ­. ðŸ’¬', 'bot');
+                setTimeout(() => this.startQualification(), 500);
+            } else {
+                setTimeout(() => this.askAboutBusiness(), 500);
+            }
         }
     }
     
-    /**
-     * Mostrar botones de opciones
-     */
-    showButtonOptions(options, field) {
+    askAboutBusiness() {
+        this.currentPhase = 'business';
+        this.chatOptions.innerHTML = '';
+        this.chatInput.style.display = 'block';
+        this.chatSendBtn.style.display = 'block';
+        
+        this.addMessage('Perfecto, vamos a entender bien tu negocio para recomendarte la mejor soluciÃ³n.\n\nPrimero: Â¿CuÃ©ntame sobre tu empresa? (Nombre, tamaÃ±o, sector/industria)', 'bot');
+        this.chatInput.placeholder = 'Ej: Somos una empresa de logÃ­stica con 50 empleados...';
+        this.chatInput.focus();
+    }
+    
+    handleInput() {
+        const input = this.chatInput.value.trim();
+        if (!input) return;
+        
+        this.addMessage(input, 'user');
+        this.conversationHistory.push(input);
+        this.chatInput.value = '';
+        
+        // Analizar y continuar
+        this.analyzeAndContinue(input);
+    }
+    
+    analyzeAndContinue(userInput) {
+        switch(this.currentPhase) {
+            case 'business':
+                this.conversationData.empresa = userInput;
+                this.detectIndustry(userInput);
+                setTimeout(() => this.askAboutProblems(), 800);
+                break;
+            case 'problems':
+                this.conversationData.problemasPrincipales.push(userInput);
+                this.analyzeForNeeds(userInput);
+                setTimeout(() => this.askAboutProcesses(), 800);
+                break;
+            case 'processes':
+                this.conversationData.procesosActuales = userInput;
+                this.analyzeProcesses(userInput);
+                setTimeout(() => this.askAboutFunctionality(), 800);
+                break;
+            case 'features':
+                this.conversationData.funcionesNecesarias.push(userInput);
+                this.analyzeFeatures(userInput);
+                setTimeout(() => this.askForContact(), 800);
+                break;
+            case 'contact':
+                this.handleContactInfo(userInput);
+                break;
+        }
+    }
+    
+    askAboutProblems() {
+        this.currentPhase = 'problems';
+        this.addMessage('ðŸ‘ Gracias por esa informaciÃ³n.\n\nAhora lo importante: Â¿CuÃ¡les son los **principales desafÃ­os o problemas** que enfrentas actualmente en tu operaciÃ³n? (Procesos lentos, informaciÃ³n desorganizada, dificultad para tomar decisiones, etc.)', 'bot');
+        this.chatInput.placeholder = 'Ej: No tenemos control de inventario en tiempo real...';
+    }
+    
+    askAboutProcesses() {
+        this.currentPhase = 'processes';
+        this.addMessage('Entiendo. Esos son desafÃ­os comunes.\n\nCuÃ©ntame: **Â¿CuÃ¡les son los procesos que hoy haces de forma manual** o que gustarÃ­a automatizar? (Ã“rdenes de compra, facturaciÃ³n, reportes, etc.)', 'bot');
+        this.chatInput.placeholder = 'Ej: Actualmente generamos reportes manualmente cada semana...';
+    }
+    
+    askAboutFunctionality() {
+        this.currentPhase = 'features';
+        this.addMessage('Claro. Y pensando en la soluciÃ³n ideal:\n\n**Â¿QuÃ© funcionalidades especÃ­ficas necesitas?** (Panel de control, gestiÃ³n de usuarios, pagos online, alertas, historial, etc.)', 'bot');
+        this.chatInput.placeholder = 'Ej: Necesitamos un dashboard con mÃ©tricas en tiempo real...';
+    }
+    
+    askForContact() {
+        this.currentPhase = 'contact';
+        this.chatOptions.innerHTML = '';
+        this.addMessage('Excelente. Para poder hacerte seguimiento y propuesta personalizada:\n\nÂ¿CuÃ¡l es tu nombre y correo electrÃ³nico?', 'bot');
+        this.chatInput.placeholder = 'Nombre';
+    }
+    
+    handleContactInfo(input) {
+        if (this.conversationData.nombre === '') {
+            this.conversationData.nombre = input;
+            this.chatInput.placeholder = 'tu@email.com';
+            this.addMessage(`Gracias ${input}. Y tu correo:`, 'bot');
+            this.chatInput.value = '';
+        } else if (this.conversationData.email === '') {
+            if (!this.validateEmail(input)) {
+                this.addMessage('Ese no parece ser un email vÃ¡lido. Intenta de nuevo:', 'bot');
+                return;
+            }
+            this.conversationData.email = input;
+            this.chatInput.placeholder = '+56 9 XXXX XXXX';
+            this.addMessage(`Perfecto. Y tu telÃ©fono de contacto:`, 'bot');
+            this.chatInput.value = '';
+        } else if (this.conversationData.telefono === '') {
+            this.conversationData.telefono = input;
+            setTimeout(() => this.generateSummary(), 800);
+        }
+    }
+    
+    analyzeForNeeds(text) {
+        const lower = text.toLowerCase();
+        
+        // ERP
+        if (this.matchesKeywords(lower, ['inventario', 'stock', 'compra', 'proveedor', 'producciÃ³n', 'materia prima'])) {
+            this.detectedNeeds.inventario = true;
+            this.detectedNeeds.erp = true;
+        }
+        
+        // CRM
+        if (this.matchesKeywords(lower, ['cliente', 'lead', 'venta', 'seguimiento', 'oportunidad', 'contacto'])) {
+            this.detectedNeeds.crm = true;
+        }
+        
+        // Ecommerce
+        if (this.matchesKeywords(lower, ['vender online', 'tienda', 'pago', 'carrito', 'ecommerce'])) {
+            this.detectedNeeds.ecommerce = true;
+            this.detectedNeeds.pagos = true;
+        }
+        
+        // AutomatizaciÃ³n
+        if (this.matchesKeywords(lower, ['manual', 'automatizar', 'repetitivo', 'tareas', 'procesos'])) {
+            this.detectedNeeds.automatizacion = true;
+        }
+        
+        // IA
+        if (this.matchesKeywords(lower, ['inteligencia', 'predicciÃ³n', 'anÃ¡lisis', 'machine learning', 'ia'])) {
+            this.detectedNeeds.ia = true;
+        }
+    }
+    
+    analyzeProcesses(text) {
+        this.analyzeForNeeds(text);
+        
+        const lower = text.toLowerCase();
+        if (this.matchesKeywords(lower, ['integraciÃ³n', 'conectar', 'sincronizar', 'sistemas', 'api'])) {
+            this.detectedNeeds.integracion = true;
+        }
+    }
+    
+    analyzeFeatures(text) {
+        this.analyzeForNeeds(text);
+        
+        const lower = text.toLowerCase();
+        if (this.matchesKeywords(lower, ['dashboard', 'reporte', 'grÃ¡fico', 'mÃ©trica', 'analÃ­tica'])) {
+            this.detectedNeeds.dashboard = true;
+        }
+        
+        if (this.matchesKeywords(lower, ['mÃ³vil', 'app', 'celular'])) {
+            this.detectedNeeds.appMobile = true;
+        }
+    }
+    
+    matchesKeywords(text, keywords) {
+        return keywords.some(keyword => text.includes(keyword));
+    }
+    
+    validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    detectIndustry(text) {
+        const lower = text.toLowerCase();
+        if (this.matchesKeywords(lower, ['retail', 'tienda', 'venta'])) {
+            this.detectedNeeds.ecommerce = true;
+        }
+        if (this.matchesKeywords(lower, ['logÃ­stica', 'transporte', 'envÃ­o'])) {
+            this.detectedNeeds.inventario = true;
+        }
+    }
+    
+    async generateSummary() {
+        this.currentPhase = 'summary';
+        this.chatInput.style.display = 'none';
+        this.chatSendBtn.style.display = 'none';
+        
+        this.addMessage('â³ Un momento, estoy analizando tu caso...', 'bot');
+        
+        await new Promise(r => setTimeout(r, 2000));
+        
+        // Generar recomendaciones
+        const recommendations = this.generateRecommendations();
+        
+        // Mostrar resumen profesional
+        const summary = this.generateProfessionalSummary(recommendations);
+        this.addMessage(summary, 'bot');
+        
+        // BotÃ³n de contacto
+        this.addMessage('Para continuar con tu proyecto y recibir una propuesta personalizada con timeline y presupuesto, te contactaremos en las prÃ³ximas **24 horas**. ðŸ“…\n\nÂ¿Algo mÃ¡s que deberÃ­a saber?', 'bot');
+        
+        this.chatInput.style.display = 'block';
+        this.chatSendBtn.style.display = 'block';
+        this.chatSendBtn.textContent = 'Enviar';
+        this.chatInput.placeholder = 'CuÃ©ntanos algo adicional (opcional)...';
+        
+        // Una Ãºltima pregunta
+        this.chatInput.addEventListener('change', (e) => {
+            if (e.target.value.trim()) {
+                this.conversationData.notasAdicionales = e.target.value.trim();
+                this.sendData();
+            }
+        }, { once: true });
+        
+        // Si no escribe nada, despuÃ©s de un tiempo enviar
+        setTimeout(() => {
+            this.sendData();
+        }, 5000);
+    }
+    
+    generateRecommendations() {
+        const recs = {
+            modulos: [],
+            prioridad: '',
+            estimacion: '',
+            observaciones: []
+        };
+        
+        if (this.detectedNeeds.erp) {
+            recs.modulos.push('ERP - Sistema de GestiÃ³n Empresarial');
+            recs.observaciones.push('Control de inventario y procesos operacionales');
+        }
+        
+        if (this.detectedNeeds.crm) {
+            recs.modulos.push('CRM - GestiÃ³n de Clientes y Ventas');
+            recs.observaciones.push('Seguimiento de leads y oportunidades');
+        }
+        
+        if (this.detectedNeeds.ecommerce) {
+            recs.modulos.push('Plataforma Ecommerce');
+            recs.observaciones.push('Tienda online con pagos y gestiÃ³n de Ã³rdenes');
+        }
+        
+        if (this.detectedNeeds.dashboard) {
+            recs.modulos.push('Dashboard y Reportes Inteligentes');
+            recs.observaciones.push('AnÃ¡lisis en tiempo real y toma de decisiones');
+        }
+        
+        if (this.detectedNeeds.appMobile) {
+            recs.modulos.push('AplicaciÃ³n MÃ³vil');
+            recs.observaciones.push('Acceso desde iOS y Android');
+        }
+        
+        if (this.detectedNeeds.automatizacion) {
+            recs.modulos.push('AutomatizaciÃ³n de Procesos');
+            recs.observaciones.push('ReducciÃ³n de tareas manuales y optimizaciÃ³n');
+        }
+        
+        if (this.detectedNeeds.integracion) {
+            recs.modulos.push('Integraciones con Sistemas Existentes');
+            recs.observaciones.push('SincronizaciÃ³n automÃ¡tica de datos');
+        }
+        
+        if (this.detectedNeeds.ia) {
+            recs.modulos.push('IA y Machine Learning');
+            recs.observaciones.push('Predicciones y anÃ¡lisis inteligentes');
+        }
+        
+        // Prioridad estimada
+        if (recs.modulos.length > 3) {
+            recs.prioridad = 'ALTA - SoluciÃ³n empresarial compleja';
+            recs.estimacion = '3-6 meses';
+        } else if (recs.modulos.length > 1) {
+            recs.prioridad = 'MEDIA - SoluciÃ³n integrada';
+            recs.estimacion = '2-4 meses';
+        } else {
+            recs.prioridad = 'ESTÃNDAR';
+            recs.estimacion = '1-2 meses';
+        }
+        
+        return recs;
+    }
+    
+    generateProfessionalSummary(recs) {
+        let summary = `
+âœ¨ **RESUMEN DE ANÃLISIS Y RECOMENDACIONES** âœ¨
+
+**Cliente:** ${this.conversationData.nombre}
+ðŸ“§ ${this.conversationData.email}
+ðŸ“± ${this.conversationData.telefono}
+
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+
+**ðŸ“Š NECESIDADES IDENTIFICADAS:**
+${this.conversationData.problemasPrincipales.map((p, i) => `${i + 1}. ${p}`).join('\n')}
+
+**ðŸ”§ PROCESOS A MEJORAR:**
+${this.conversationData.procesosActuales}
+
+**âš™ï¸ FUNCIONALIDADES REQUERIDAS:**
+${this.conversationData.funcionesNecesarias.map((f, i) => `${i + 1}. ${f}`).join('\n')}
+
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+
+**ðŸŽ¯ SOLUCIÃ“N RECOMENDADA:**
+${recs.modulos.length > 0 ? recs.modulos.map((m, i) => `${i + 1}. ${m}`).join('\n') : 'SoluciÃ³n personalizada'}
+
+**ðŸ“ˆ PRIORIDAD:** ${recs.prioridad}
+â±ï¸ **ESTIMACIÃ“N:** ${recs.estimacion}
+
+**ðŸ” OBSERVACIONES TÃ‰CNICAS:**
+${recs.observaciones.map((o, i) => `â€¢ ${o}`).join('\n')}
+
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+
+ðŸš€ **PRÃ“XIMOS PASOS:**
+1. Te enviaremos una propuesta personalizada
+2. Llamada de descubrimiento detallado (30 min)
+3. DemostraciÃ³n de casos similares
+4. Presupuesto y timeline final
+        `;
+        
+        return summary;
+    }
+    
+    async sendData() {
+        this.addMessage('ðŸ“¨ Registrando tu informaciÃ³n en nuestro sistema...', 'bot');
+        
+        const payload = {
+            nombre: this.conversationData.nombre,
+            email: this.conversationData.email,
+            telefono: this.conversationData.telefono,
+            empresa: this.conversationData.empresa,
+            problemas: this.conversationData.problemasPrincipales,
+            procesos: this.conversationData.procesosActuales,
+            funcionalidades: this.conversationData.funcionesNecesarias,
+            notasAdicionales: this.conversationData.notasAdicionales,
+            detectedNeeds: this.detectedNeeds,
+            timestamp: new Date().toISOString()
+        };
+        
+        try {
+            const response = await fetch('/api/enviar-solicitud', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            
+            this.addMessage('âœ… Perfecto. Tu informaciÃ³n fue registrada.\n\nNuestro equipo senior analizarÃ¡ tu caso y te contactaremos en las prÃ³ximas 24 horas con una propuesta especÃ­fica. ðŸŽ¯', 'bot');
+        } catch (error) {
+            console.error('Error:', error);
+            this.addMessage('âœ… Tu solicitud fue procesada exitosamente.\n\nNos pondremos en contacto muy pronto. ðŸ™Œ', 'bot');
+        }
+        
+        this.chatInput.disabled = true;
+        this.chatSendBtn.disabled = true;
+        
+        setTimeout(() => this.showResetButton(), 2000);
+    }
+    
+    showResetButton() {
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'chat-option-btn';
+        resetBtn.textContent = 'ðŸ”„ Nueva consulta';
+        resetBtn.style.marginTop = '10px';
+        resetBtn.addEventListener('click', () => this.resetChat());
+        this.chatOptions.innerHTML = '';
+        this.chatOptions.classList.remove('hidden');
+        this.chatOptions.appendChild(resetBtn);
+    }
+    
+    resetChat() {
+        this.currentPhase = 'greeting';
+        this.conversationHistory = [];
+        this.conversationData = {
+            empresa: '', tamaÃ±o: '', industria: '',
+            problemasPrincipales: [], procesosActuales: '',
+            procesosAAutomatizar: [], funcionesNecesarias: [],
+            usuariosEstimados: 0, tiposUsuarios: [],
+            reportesNecesarios: [], integraciÃ³nRequerida: false,
+            sistemasExistentes: [], presupuesto: '',
+            timeline: '', nombre: '', email: '', telefono: '',
+            notasAdicionales: ''
+        };
+        this.detectedNeeds = {
+            erp: false, crm: false, ecommerce: false,
+            automatizacion: false, integracion: false,
+            dashboard: false, appMobile: false, ia: false,
+            admin: false, pagos: false, inventario: false, rrhh: false
+        };
+        
+        this.chatMessages.innerHTML = '';
+        this.chatInput.value = '';
+        this.chatInput.disabled = false;
+        this.chatSendBtn.disabled = false;
+        this.chatOptions.innerHTML = '';
+        this.showGreeting();
+    }
+    
+    addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${sender}`;
+        
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${sender}`;
+        bubble.innerHTML = text; // Permitir markdown simple
+        
+        messageDiv.appendChild(bubble);
+        this.chatMessages.appendChild(messageDiv);
+        
+        this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+    }
+    
+    showOptions(options, phase) {
         this.chatOptions.innerHTML = '';
         this.chatOptions.classList.remove('hidden');
         
@@ -1010,395 +1332,20 @@ class ChatBot {
             const btn = document.createElement('button');
             btn.className = 'chat-option-btn';
             btn.textContent = option;
-            btn.addEventListener('click', () => {
-                this.selectOption(option, field);
-            });
+            btn.addEventListener('click', () => this.handleOption(option, phase));
             this.chatOptions.appendChild(btn);
         });
     }
     
-    /**
-     * Mostrar checkboxes para selecciones múltiples
-     */
-    showCheckboxOptions(options, field) {
-        this.chatOptions.innerHTML = '';
-        this.chatOptions.classList.remove('hidden');
-        this.chatOptions.style.flexDirection = 'column';
-        this.chatOptions.style.alignItems = 'flex-start';
-        
-        this.selectedOptions = [];
-        
-        options.forEach((option, index) => {
-            const container = document.createElement('label');
-            container.className = 'chat-checkbox-label';
-            container.style.display = 'flex';
-            container.style.alignItems = 'center';
-            container.style.gap = '10px';
-            container.style.padding = '8px 12px';
-            container.style.margin = '5px 0';
-            container.style.cursor = 'pointer';
-            container.style.borderRadius = '8px';
-            container.style.transition = 'background 0.2s';
-            
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.value = option;
-            checkbox.style.width = '18px';
-            checkbox.style.height = '18px';
-            checkbox.style.cursor = 'pointer';
-            checkbox.style.accentColor = '#B026FF';
-            checkbox.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    this.selectedOptions.push(option);
-                } else {
-                    this.selectedOptions = this.selectedOptions.filter(item => item !== option);
-                }
-                
-                // Cambiar fondo
-                if (e.target.checked) {
-                    container.style.background = 'rgba(176, 38, 255, 0.2)';
-                } else {
-                    container.style.background = 'transparent';
-                }
-            });
-            
-            const label = document.createElement('span');
-            label.textContent = option;
-            label.style.fontSize = '14px';
-            label.style.userSelect = 'none';
-            
-            container.appendChild(checkbox);
-            container.appendChild(label);
-            this.chatOptions.appendChild(container);
-        });
-    }
-    
-    /**
-     * Seleccionar opción de botones
-     */
-    selectOption(option, field) {
-        // Agregar respuesta del usuario
-        this.addMessage(option, 'user');
-        
-        // Guardar dato
-        this.conversationData[field] = option;
-        
-        // Ejecutar acción si existe
-        const step = this.steps[this.currentStep];
-        if (step.action && !step.action(option)) {
-            this.finishQuickly(); // Terminar rápido si no califica
-            return;
-        }
-        
-        // Pasar al siguiente paso
-        this.nextStep();
-    }
-    
-    /**
-     * Finalizar rápido si no califica
-     */
-    finishQuickly() {
-        this.addMessage('Entendido. Si en el futuro tienes un proyecto, ¡no dudes en contactarnos! 🙌', 'bot');
-        this.addMessage('Puedes explorar nuestros servicios o dejar tu correo para consultarías futuras.', 'bot');
-        this.chatInput.disabled = true;
-        this.chatSendBtn.disabled = true;
-    }
-    
-    /**
-     * Manejar entrada del usuario
-     */
-    handleUserInput() {
-        const step = this.steps[this.currentStep];
-        let userInput = '';
-        
-        if (step.type === 'checkboxes') {
-            // Para checkboxes, usar array seleccionado
-            if (this.selectedOptions.length === 0) {
-                this.addMessage('Por favor, selecciona al menos una opción.', 'bot');
-                return;
-            }
-            userInput = this.selectedOptions.join(', ');
-        } else {
-            // Para texto e email
-            userInput = this.chatInput.value.trim();
-            
-            if (!userInput && step.field !== 'notas_adicionales') {
-                this.addMessage('Por favor, escribe una respuesta válida.', 'bot');
-                return;
-            }
-        }
-        
-        // Validar entrada
-        if (userInput && !step.validation(userInput)) {
-            let errorMsg = 'Respuesta inválida. ';
-            if (step.type === 'email') {
-                errorMsg += 'Por favor, ingresa un correo válido.';
-            } else if (step.field === 'telefono') {
-                errorMsg += 'Por favor, ingresa un teléfono válido (ej: +56 9 XXXX XXXX).';
-            } else {
-                errorMsg += 'Por favor, intenta de nuevo.';
-            }
-            this.addMessage(errorMsg, 'bot');
-            return;
-        }
-        
-        // Agregar mensaje del usuario
-        this.addMessage(userInput || '(Sin información adicional)', 'user');
-        
-        // Guardar dato
-        this.conversationData[step.field] = userInput;
-        
-        // Pasar al siguiente paso
-        this.nextStep();
-    }
-    
-    /**
-     * Pasar al siguiente paso
-     */
-    nextStep() {
-        this.currentStep++;
-        
-        if (this.currentStep < this.steps.length) {
-            // Pequeño delay antes de mostrar siguiente pregunta
-            setTimeout(() => {
-                this.showStep(this.currentStep);
-            }, 600);
-        } else {
-            // Conversación finalizada
-            this.finishConversation();
-        }
-    }
-    
-    /**
-     * Finalizar conversación y mostrar resumen
-     */
-    finishConversation() {
-        // Resumen con emojis
-        this.addMessage('✨ ¡Excelente! Aquí está tu resumen:', 'bot');
-        
-        const resumen = `
-📋 **RESUMEN DE TU PROYECTO:**
-
-💰 **Presupuesto:** ${this.conversationData.presupuesto || 'No especificado'}
-🎯 **Tipo de Solución:** ${this.conversationData.tipo_proyecto || 'No especificado'}
-🚀 **Objetivo Principal:** ${this.conversationData.problema_principal || 'No especificado'}
-⚙️ **Funcionalidades Clave:** ${Array.isArray(this.conversationData.funcionalidades) ? this.conversationData.funcionalidades.join(', ') : this.conversationData.funcionalidades || 'No especificadas'}
-⏰ **Timeline Deseado:** ${this.conversationData.timeline || 'No especificado'}
-
----
-
-👤 **Contacto:**
-📧 ${this.conversationData.correo}
-📱 ${this.conversationData.telefono}
-        `;
-        
-        this.addMessage(resumen, 'bot');
-        
-        this.addMessage('🎉 Tu solicitud será procesada por nuestro equipo especializado.\n\nNos pondremos en contacto en las próximas **24 horas** para discutir detalles, timeline y presupuesto exacto.\n\n¡Gracias por elegir BitForge! 🚀', 'bot');
-        
-        // Enviar datos después de 1.5 segundos
-        setTimeout(() => {
-            this.sendData();
-        }, 1500);
-    }
-    
-    /**
-     * Enviar datos al servidor
-     */
-    sendData() {
-        // Agregar fecha y hora
-        this.conversationData.fecha_envio = new Date().toLocaleDateString('es-ES');
-        this.conversationData.hora_envio = new Date().toLocaleTimeString('es-ES');
-        
-        // Mostrar mensaje de envío
-        this.addMessage('📨 Enviando tu solicitud a nuestro equipo...', 'bot');
-        
-        // Enviar a la API del servidor
-        fetch('/api/enviar-solicitud', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.conversationData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.addMessage('✅ ¡Tu solicitud fue enviada correctamente!', 'bot');
-            this.addMessage('Revisa tu email para confirmación. ¡Estaremos en contacto muy pronto! 🙌', 'bot');
-            
-            // Desabilitar input
-            this.chatInput.disabled = true;
-            this.chatSendBtn.disabled = true;
-            
-            // Opción para reiniciar
-            setTimeout(() => {
-                this.showResetButton();
-            }, 2000);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            this.addMessage('✅ Tu solicitud fue procesada correctamente en nuestro sistema.', 'bot');
-            this.addMessage('Pronto recibirás un email de confirmación. ¡Gracias! 🎉', 'bot');
-            this.chatInput.disabled = true;
-            this.chatSendBtn.disabled = true;
-            
-            setTimeout(() => {
-                this.showResetButton();
-            }, 2000);
-        });
-    }
-    
-    /**
-     * Mostrar botón para reiniciar
-     */
-    showResetButton() {
-        const resetBtn = document.createElement('button');
-        resetBtn.textContent = '🔄 Enviar Otra Solicitud';
-        resetBtn.className = 'chat-option-btn';
-        resetBtn.style.flex = '1';
-        resetBtn.addEventListener('click', () => this.resetChat());
-        
-        const container = document.createElement('div');
-        container.style.display = 'flex';
-        container.style.gap = '10px';
-        container.style.padding = '15px';
-        container.appendChild(resetBtn);
-        
-        this.chatMessages.parentElement.insertBefore(container, this.chatMessages.nextSibling);
-    }
-    
-    /**
-     * Resetear chat
-     */
-    resetChat() {
-        this.currentStep = 0;
-        this.conversationData = {};
-        this.chatMessages.innerHTML = '';
-        this.chatInput.disabled = false;
-        this.chatSendBtn.disabled = false;
-        this.openChat();
-    }
-    
-    /**
-     * Agregar mensaje al chat
-     */
-    addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `chat-message ${sender}`;
-        
-        const bubble = document.createElement('div');
-        bubble.className = `chat-bubble ${sender}`;
-        bubble.textContent = text;
-        
-        messageDiv.appendChild(bubble);
-        this.chatMessages.appendChild(messageDiv);
-        
-        // Scroll automático
-        this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+    startQualification() {
+        setTimeout(() => this.askAboutBusiness(), 500);
     }
 }
 
 // Inicializar chatbot cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
-    new ChatBot();
+    setTimeout(() => {
+        window.chatbot = new ChatBot();
+    }, 100);
 });
 
-/**
- * Envía usando EmailJS (opcional)
- * Requiere: <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
- */
-function enviarConEmailJS(datos, btnSubmit, loaderIcon) {
-    // CONFIGURAR AQUÍ: Obtén estas claves de https://www.emailjs.com/
-    const SERVICE_ID = 'tu_service_id';
-    const TEMPLATE_ID = 'tu_template_id';
-    const PUBLIC_KEY = 'tu_public_key';
-
-    // Parámetros para el template de EmailJS
-    const templateParams = {
-        to_email: 'miguel.nahum.oe@gmail.com', // CAMBIAR AQUÍ
-        nombre: datos.nombre,
-        empresa: datos.empresa,
-        correo: datos.correo,
-        telefono: datos.telefono,
-        tipo_proyecto: datos.tipo_proyecto,
-        mensaje_inicial: datos.mensaje_inicial,
-        objetivo_principal: datos.objetivo_principal,
-        presupuesto: datos.presupuesto,
-        fecha_entrega: datos.fecha_entrega
-    };
-
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-        .then((response) => {
-            console.log('Email enviado con éxito:', response);
-            mostrarPantallaExito(btnSubmit, loaderIcon);
-        })
-        .catch((error) => {
-            console.error('Error al enviar email:', error);
-            mostrarErrorEnvio(btnSubmit, loaderIcon);
-        });
-}
-
-/**
- * Muestra la pantalla de éxito
- */
-function mostrarPantallaExito(btnSubmit, loaderIcon) {
-    loaderIcon.textContent = '✨';
-    btnSubmit.disabled = true;
-
-    // Esperar un poco y cambiar a fase de éxito
-    setTimeout(() => {
-        cambiarFase(3);
-        btnSubmit.classList.remove('loading');
-    }, 1500);
-}
-
-/**
- * Muestra error en envío
- */
-function mostrarErrorEnvio(btnSubmit, loaderIcon) {
-    loaderIcon.textContent = '❌';
-    
-    setTimeout(() => {
-        alert('Hubo un error al enviar. Por favor, intenta nuevamente o contacta directamente.');
-        btnSubmit.classList.remove('loading');
-        btnSubmit.disabled = false;
-        loaderIcon.textContent = '📨';
-    }, 2000);
-}
-
-/**
- * Reinicia el formulario completo
- */
-function reiniciarFormulario() {
-    // Resetear variables
-    currentPhase = 1;
-
-    // Limpiar formularios
-    document.getElementById('form-phase1').reset();
-    document.getElementById('form-phase2').reset();
-
-    // Limpiar errores
-    document.querySelectorAll('.error-message').forEach(el => {
-        el.classList.remove('show');
-    });
-    document.querySelectorAll('.has-error').forEach(el => {
-        el.classList.remove('has-error');
-    });
-
-    // Mostrar fase 1
-    const phase1 = document.getElementById('phase1');
-    const phaseSuccess = document.getElementById('phase-success');
-    
-    if (phaseSuccess) {
-        phaseSuccess.classList.remove('active');
-    }
-    if (phase1) {
-        phase1.classList.add('active');
-    }
-
-    // Resetear progreso
-    actualizarProgreso();
-
-    // Scroll a la sección
-    document.querySelector('.requirements-section').scrollIntoView({ behavior: 'smooth' });
-}
