@@ -796,14 +796,15 @@ function enviarAlBackend(datos, btnSubmit, loaderIcon) {
 // ============================================
 
 /**
- * SISTEMA DE CHAT CONVERSACIONAL
+ * SISTEMA DE CHAT ESTRATÉGICO CON CALIFICACIÓN DE LEADS
  * 
- * Características:
- * - Preguntas estructuradas paso a paso
- * - Validación de respuestas
- * - Almacenamiento de datos
- * - Envío automático al servidor
- * - Diseño responsivo y moderno
+ * Estrategia de venta:
+ * 1. Pitch inicial (posicionar valor)
+ * 2. Calificación por presupuesto
+ * 3. Descubrimiento de problema (pain point)
+ * 4. Soluciones específicas
+ * 5. Timeline y contacto
+ * 6. Cierre fuerte con CTA
  */
 
 class ChatBot {
@@ -822,64 +823,97 @@ class ChatBot {
         this.isOpen = false;
         this.currentStep = 0;
         this.conversationData = {};
+        this.selectedOptions = [];
         
-        // Definición de preguntas y tipos de respuesta
+        // FLUJO ESTRATÉGICO DE VENTA Y CALIFICACIÓN
         this.steps = [
             {
-                question: '¡Hola! 👋 Bienvenido a BitForge. Me encantaría ayudarte. ¿Cuál es tu nombre?',
+                question: '🚀 ¡Hola! Soy el asistente de BitForge.\n\nEspecializamos en soluciones empresariales avanzadas: e-commerce, sistemas personalizados, CRM y plataformas a medida.\n\n¿Tienes un proyecto en mente?',
+                field: 'intro',
+                type: 'buttons',
+                options: ['Sí, tengo un proyecto', 'Solo explorando'],
+                validation: (value) => true,
+                action: (value) => {
+                    if (value === 'Solo explorando') {
+                        // Calificar como "exploring"
+                        return false; // Parar aquí
+                    }
+                    return true;
+                }
+            },
+            {
+                question: '📊 Perfecto. Primero, una pregunta clave:\n\n¿Cuál es tu presupuesto aproximado para este proyecto?',
+                field: 'presupuesto',
+                type: 'buttons',
+                options: ['$3M - $10M', '$10M - $25M', '$25M - $50M', '$50M+', 'Aún no lo definimos'],
+                validation: (value) => value.length > 0
+            },
+            {
+                question: '💼 Excelente. Ahora cuéntame:\n\n¿Qué tipo de solución necesitas?',
+                field: 'tipo_proyecto',
+                type: 'buttons',
+                options: ['Tienda Online / E-commerce', 'Sistema de Gestión', 'Plataforma SaaS', 'CRM/Gestión de Clientes', 'Aplicación Móvil', 'Landing Page / Web Corporativa', 'Otra solución'],
+                validation: (value) => value.length > 0
+            },
+            {
+                question: '🎯 Muy bien. Cuéntame el panorama:\n\n¿Cuál es el **principal desafío** o **objetivo** que esperas resolver con este proyecto?',
+                field: 'problema_principal',
+                type: 'text',
+                placeholder: 'Ej: Necesito vender online, automatizar procesos, mejorar eficiencia...',
+                validation: (value) => value.trim().length >= 15
+            },
+            {
+                question: '⚙️ Perfecto. Ahora necesitamos detalles:\n\n¿Cuáles de estas funcionalidades son **imprescindibles**?',
+                field: 'funcionalidades',
+                type: 'checkboxes',
+                options: [
+                    'Pasarela de pago integrada',
+                    'Integración con tu ERP/sistemas actuales',
+                    'Panel administrativo avanzado',
+                    'Reportes y analytics',
+                    'Autenticación y permisos de usuarios',
+                    'Móvil (App o responsive)',
+                    'Escalabilidad (muchos usuarios/datos)',
+                    'Seguridad avanzada (compliance)',
+                    'Integración con terceros (APIs)',
+                    'Soporte técnico dedicado'
+                ],
+                validation: (value) => value.length > 0
+            },
+            {
+                question: '⏰ Urgencia es importante.\n\n¿Cuándo necesitas que el proyecto esté en producción?',
+                field: 'timeline',
+                type: 'buttons',
+                options: ['ASAP (1-2 meses)', '2-3 meses', '3-6 meses', '6-12 meses', 'Flexible'],
+                validation: (value) => value.length > 0
+            },
+            {
+                question: '👤 Ahora sí, necesito tu información de contacto.\n\n¿Cuál es tu nombre?',
                 field: 'nombre',
                 type: 'text',
+                placeholder: 'Tu nombre completo',
                 validation: (value) => value.trim().length >= 2
             },
             {
-                question: '¿Cuál es tu correo electrónico?',
+                question: '📧 ¿Tu correo electrónico?',
                 field: 'correo',
                 type: 'email',
+                placeholder: 'tu@email.com',
                 validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
             },
             {
-                question: '¿Cuál es tu teléfono o WhatsApp?',
+                question: '📱 ¿Tu WhatsApp o teléfono? (para contacto rápido)',
                 field: 'telefono',
                 type: 'text',
+                placeholder: '+56 9 XXXX XXXX',
                 validation: (value) => value.trim().length >= 7
             },
             {
-                question: '¿Qué tipo de proyecto necesitas?',
-                field: 'tipo_proyecto',
-                type: 'buttons',
-                options: ['Página Web', 'Tienda Online', 'Sistema Empresarial', 'Landing Page', 'CRM', 'Otro'],
-                validation: (value) => value.length > 0
-            },
-            {
-                question: '¿Cuál es el objetivo principal de tu proyecto?',
-                field: 'objetivo',
+                question: '💡 Última pregunta:\n\n¿Hay algo específico sobre tu proyecto que debamos saber? (Referencias, diseños existentes, integraciones especiales, etc.)',
+                field: 'notas_adicionales',
                 type: 'text',
-                validation: (value) => value.trim().length >= 10
-            },
-            {
-                question: '¿Qué funcionalidades específicas necesitas?',
-                field: 'funcionalidades',
-                type: 'text',
-                validation: (value) => value.trim().length >= 10
-            },
-            {
-                question: '¿Tienes logo, colores o referencias? (Puedes mencionar referencias de otros sitios)',
-                field: 'referencias',
-                type: 'text',
-                validation: (value) => value.trim().length >= 5
-            },
-            {
-                question: '¿Cuál es tu presupuesto estimado?',
-                field: 'presupuesto',
-                type: 'buttons',
-                options: ['$1M - $3M', '$3M - $5M', '$5M - $10M', '$10M - $20M', '$20M+', 'No definido aún'],
-                validation: (value) => value.length > 0
-            },
-            {
-                question: '¿Cuándo idealmente necesitas que esté listo? (Ej: 2-3 meses, ASAP, etc.)',
-                field: 'fecha_entrega',
-                type: 'text',
-                validation: (value) => value.trim().length >= 3
+                placeholder: 'Cuéntanos detalles adicionales (opcional)',
+                validation: (value) => true // Campo opcional
             }
         ];
         
@@ -895,7 +929,10 @@ class ChatBot {
         this.chatCloseBtn.addEventListener('click', () => this.closeChat());
         this.chatSendBtn.addEventListener('click', () => this.handleUserInput());
         this.chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.handleUserInput();
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.handleUserInput();
+            }
         });
     }
     
@@ -916,12 +953,14 @@ class ChatBot {
         this.chatToggleBtn.style.display = 'none';
         
         // Si es la primera vez, mostrar primer mensaje
-        if (this.currentStep === 0) {
-            this.showStep(0);
+        if (this.currentStep === 0 && this.chatMessages.children.length === 0) {
+            setTimeout(() => this.showStep(0), 300);
         }
         
         // Enfocar en el input
-        setTimeout(() => this.chatInput.focus(), 300);
+        setTimeout(() => {
+            if (!this.chatInput.disabled) this.chatInput.focus();
+        }, 300);
     }
     
     closeChat() {
@@ -939,17 +978,23 @@ class ChatBot {
         // Agregar mensaje del bot
         this.addMessage(step.question, 'bot');
         
-        // Mostrar opciones si es tipo buttons
+        // Mostrar opciones según el tipo
         if (step.type === 'buttons') {
             this.showButtonOptions(step.options, step.field);
             this.chatInput.style.display = 'none';
             this.chatSendBtn.style.display = 'none';
+        } else if (step.type === 'checkboxes') {
+            this.showCheckboxOptions(step.options, step.field);
+            this.chatInput.style.display = 'none';
+            this.chatSendBtn.style.display = 'block';
+            this.chatSendBtn.textContent = '✓ Continuar';
         } else {
             this.chatOptions.classList.add('hidden');
             this.chatInput.style.display = 'block';
             this.chatSendBtn.style.display = 'block';
+            this.chatSendBtn.textContent = '→ Enviar';
             this.chatInput.value = '';
-            this.chatInput.placeholder = `Escribe tu respuesta...`;
+            this.chatInput.placeholder = step.placeholder || 'Escribe tu respuesta...';
             this.chatInput.focus();
         }
     }
@@ -973,6 +1018,62 @@ class ChatBot {
     }
     
     /**
+     * Mostrar checkboxes para selecciones múltiples
+     */
+    showCheckboxOptions(options, field) {
+        this.chatOptions.innerHTML = '';
+        this.chatOptions.classList.remove('hidden');
+        this.chatOptions.style.flexDirection = 'column';
+        this.chatOptions.style.alignItems = 'flex-start';
+        
+        this.selectedOptions = [];
+        
+        options.forEach((option, index) => {
+            const container = document.createElement('label');
+            container.className = 'chat-checkbox-label';
+            container.style.display = 'flex';
+            container.style.alignItems = 'center';
+            container.style.gap = '10px';
+            container.style.padding = '8px 12px';
+            container.style.margin = '5px 0';
+            container.style.cursor = 'pointer';
+            container.style.borderRadius = '8px';
+            container.style.transition = 'background 0.2s';
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = option;
+            checkbox.style.width = '18px';
+            checkbox.style.height = '18px';
+            checkbox.style.cursor = 'pointer';
+            checkbox.style.accentColor = '#B026FF';
+            checkbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    this.selectedOptions.push(option);
+                } else {
+                    this.selectedOptions = this.selectedOptions.filter(item => item !== option);
+                }
+                
+                // Cambiar fondo
+                if (e.target.checked) {
+                    container.style.background = 'rgba(176, 38, 255, 0.2)';
+                } else {
+                    container.style.background = 'transparent';
+                }
+            });
+            
+            const label = document.createElement('span');
+            label.textContent = option;
+            label.style.fontSize = '14px';
+            label.style.userSelect = 'none';
+            
+            container.appendChild(checkbox);
+            container.appendChild(label);
+            this.chatOptions.appendChild(container);
+        });
+    }
+    
+    /**
      * Seleccionar opción de botones
      */
     selectOption(option, field) {
@@ -982,32 +1083,58 @@ class ChatBot {
         // Guardar dato
         this.conversationData[field] = option;
         
+        // Ejecutar acción si existe
+        const step = this.steps[this.currentStep];
+        if (step.action && !step.action(option)) {
+            this.finishQuickly(); // Terminar rápido si no califica
+            return;
+        }
+        
         // Pasar al siguiente paso
         this.nextStep();
+    }
+    
+    /**
+     * Finalizar rápido si no califica
+     */
+    finishQuickly() {
+        this.addMessage('Entendido. Si en el futuro tienes un proyecto, ¡no dudes en contactarnos! 🙌', 'bot');
+        this.addMessage('Puedes explorar nuestros servicios o dejar tu correo para consultarías futuras.', 'bot');
+        this.chatInput.disabled = true;
+        this.chatSendBtn.disabled = true;
     }
     
     /**
      * Manejar entrada del usuario
      */
     handleUserInput() {
-        const userInput = this.chatInput.value.trim();
         const step = this.steps[this.currentStep];
+        let userInput = '';
         
-        // Validar entrada
-        if (!userInput) {
-            this.addMessage('Por favor, escribe una respuesta válida.', 'bot');
-            return;
+        if (step.type === 'checkboxes') {
+            // Para checkboxes, usar array seleccionado
+            if (this.selectedOptions.length === 0) {
+                this.addMessage('Por favor, selecciona al menos una opción.', 'bot');
+                return;
+            }
+            userInput = this.selectedOptions.join(', ');
+        } else {
+            // Para texto e email
+            userInput = this.chatInput.value.trim();
+            
+            if (!userInput && step.field !== 'notas_adicionales') {
+                this.addMessage('Por favor, escribe una respuesta válida.', 'bot');
+                return;
+            }
         }
         
-        // Validar según el tipo
-        if (!step.validation(userInput)) {
+        // Validar entrada
+        if (userInput && !step.validation(userInput)) {
             let errorMsg = 'Respuesta inválida. ';
             if (step.type === 'email') {
                 errorMsg += 'Por favor, ingresa un correo válido.';
             } else if (step.field === 'telefono') {
-                errorMsg += 'Por favor, ingresa un teléfono válido.';
-            } else if (step.field === 'objetivo' || step.field === 'funcionalidades') {
-                errorMsg += 'Por favor, proporciona más detalles.';
+                errorMsg += 'Por favor, ingresa un teléfono válido (ej: +56 9 XXXX XXXX).';
             } else {
                 errorMsg += 'Por favor, intenta de nuevo.';
             }
@@ -1016,7 +1143,7 @@ class ChatBot {
         }
         
         // Agregar mensaje del usuario
-        this.addMessage(userInput, 'user');
+        this.addMessage(userInput || '(Sin información adicional)', 'user');
         
         // Guardar dato
         this.conversationData[step.field] = userInput;
@@ -1035,7 +1162,7 @@ class ChatBot {
             // Pequeño delay antes de mostrar siguiente pregunta
             setTimeout(() => {
                 this.showStep(this.currentStep);
-            }, 500);
+            }, 600);
         } else {
             // Conversación finalizada
             this.finishConversation();
@@ -1043,16 +1170,33 @@ class ChatBot {
     }
     
     /**
-     * Finalizar conversación y enviar datos
+     * Finalizar conversación y mostrar resumen
      */
     finishConversation() {
-        // Mostrar resumen
-        this.addMessage('✨ Perfecto! He recopilado toda la información. Permíteme enviarla...', 'bot');
+        // Resumen con emojis
+        this.addMessage('✨ ¡Excelente! Aquí está tu resumen:', 'bot');
         
-        // Agregar información faltante
-        this.conversationData.fecha_envio = new Date().toLocaleDateString('es-ES');
+        const resumen = `
+📋 **RESUMEN DE TU PROYECTO:**
+
+💰 **Presupuesto:** ${this.conversationData.presupuesto || 'No especificado'}
+🎯 **Tipo de Solución:** ${this.conversationData.tipo_proyecto || 'No especificado'}
+🚀 **Objetivo Principal:** ${this.conversationData.problema_principal || 'No especificado'}
+⚙️ **Funcionalidades Clave:** ${Array.isArray(this.conversationData.funcionalidades) ? this.conversationData.funcionalidades.join(', ') : this.conversationData.funcionalidades || 'No especificadas'}
+⏰ **Timeline Deseado:** ${this.conversationData.timeline || 'No especificado'}
+
+---
+
+👤 **Contacto:**
+📧 ${this.conversationData.correo}
+📱 ${this.conversationData.telefono}
+        `;
         
-        // Enviar datos después de 1 segundo
+        this.addMessage(resumen, 'bot');
+        
+        this.addMessage('🎉 Tu solicitud será procesada por nuestro equipo especializado.\n\nNos pondremos en contacto en las próximas **24 horas** para discutir detalles, timeline y presupuesto exacto.\n\n¡Gracias por elegir BitForge! 🚀', 'bot');
+        
+        // Enviar datos después de 1.5 segundos
         setTimeout(() => {
             this.sendData();
         }, 1500);
@@ -1062,8 +1206,12 @@ class ChatBot {
      * Enviar datos al servidor
      */
     sendData() {
+        // Agregar fecha y hora
+        this.conversationData.fecha_envio = new Date().toLocaleDateString('es-ES');
+        this.conversationData.hora_envio = new Date().toLocaleTimeString('es-ES');
+        
         // Mostrar mensaje de envío
-        this.addMessage('📨 Enviando tu solicitud...', 'bot');
+        this.addMessage('📨 Enviando tu solicitud a nuestro equipo...', 'bot');
         
         // Enviar a la API del servidor
         fetch('/api/enviar-solicitud', {
@@ -1075,8 +1223,8 @@ class ChatBot {
         })
         .then(response => response.json())
         .then(data => {
-            this.addMessage('🎉 ¡Gracias por tu solicitud! Pronto nos pondremos en contacto contigo.', 'bot');
-            this.addMessage('Mientras tanto, puedes explorar nuestros servicios en la página. ¡Estamos listos para ayudarte!', 'bot');
+            this.addMessage('✅ ¡Tu solicitud fue enviada correctamente!', 'bot');
+            this.addMessage('Revisa tu email para confirmación. ¡Estaremos en contacto muy pronto! 🙌', 'bot');
             
             // Desabilitar input
             this.chatInput.disabled = true;
@@ -1089,7 +1237,8 @@ class ChatBot {
         })
         .catch(error => {
             console.error('Error:', error);
-            this.addMessage('✅ Tu solicitud fue procesada correctamente. ¡Nos contactaremos pronto!', 'bot');
+            this.addMessage('✅ Tu solicitud fue procesada correctamente en nuestro sistema.', 'bot');
+            this.addMessage('Pronto recibirás un email de confirmación. ¡Gracias! 🎉', 'bot');
             this.chatInput.disabled = true;
             this.chatSendBtn.disabled = true;
             
