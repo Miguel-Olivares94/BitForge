@@ -578,6 +578,57 @@
         <p>🔧 Transformamos tu visión empresarial en realidad</p>
     </footer>
 
+    <!-- ============================================
+         WIDGET CHAT AUTOMATIZADO - TOMA DE REQUERIMIENTOS
+         ============================================
+         Sistema de chat flotante para conversación interactiva
+         que guía al cliente a través de preguntas estructuradas.
+    ============================================ -->
+    
+    <!-- Botón Flotante del Chat -->
+    <div id="chat-widget" class="chat-widget">
+        <!-- Botón Flotante (visible cuando chat está cerrado) -->
+        <div id="chat-toggle-btn" class="chat-toggle-btn">
+            <span class="chat-icon">💬</span>
+            <span class="chat-pulse"></span>
+        </div>
+        
+        <!-- Ventana del Chat -->
+        <div id="chat-window" class="chat-window hidden">
+            <!-- Encabezado del Chat -->
+            <div class="chat-header">
+                <div class="chat-header-content">
+                    <h3>Chat BitForge</h3>
+                    <p class="chat-subtitle">Cuéntanos sobre tu proyecto</p>
+                </div>
+                <button id="chat-close-btn" class="chat-close-btn" aria-label="Cerrar chat">✕</button>
+            </div>
+            
+            <!-- Área de Mensajes -->
+            <div id="chat-messages" class="chat-messages">
+                <!-- Los mensajes se agregarán dinámicamente aquí -->
+            </div>
+            
+            <!-- Área de Entrada -->
+            <div class="chat-input-area">
+                <!-- Input de texto o botones de opciones según el paso -->
+                <input 
+                    type="text" 
+                    id="chat-input" 
+                    class="chat-input" 
+                    placeholder="Escribe tu respuesta..."
+                    autocomplete="off"
+                >
+                <button id="chat-send-btn" class="chat-send-btn" aria-label="Enviar mensaje">
+                    ➜
+                </button>
+            </div>
+            
+            <!-- Contenedor para botones de opciones (cuando corresponda) -->
+            <div id="chat-options" class="chat-options hidden"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

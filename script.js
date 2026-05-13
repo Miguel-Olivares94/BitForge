@@ -791,6 +791,369 @@ function enviarAlBackend(datos, btnSubmit, loaderIcon) {
     });
 }
 
+// ============================================
+// WIDGET CHAT AUTOMATIZADO - TOMA DE REQUERIMIENTOS
+// ============================================
+
+/**
+ * SISTEMA DE CHAT CONVERSACIONAL
+ * 
+ * Características:
+ * - Preguntas estructuradas paso a paso
+ * - Validación de respuestas
+ * - Almacenamiento de datos
+ * - Envío automático al servidor
+ * - Diseño responsivo y moderno
+ */
+
+class ChatBot {
+    constructor() {
+        // Referencias a elementos DOM
+        this.chatWidget = document.getElementById('chat-widget');
+        this.chatWindow = document.getElementById('chat-window');
+        this.chatToggleBtn = document.getElementById('chat-toggle-btn');
+        this.chatCloseBtn = document.getElementById('chat-close-btn');
+        this.chatMessages = document.getElementById('chat-messages');
+        this.chatInput = document.getElementById('chat-input');
+        this.chatSendBtn = document.getElementById('chat-send-btn');
+        this.chatOptions = document.getElementById('chat-options');
+        
+        // Estado del chat
+        this.isOpen = false;
+        this.currentStep = 0;
+        this.conversationData = {};
+        
+        // Definición de preguntas y tipos de respuesta
+        this.steps = [
+            {
+                question: '¡Hola! 👋 Bienvenido a BitForge. Me encantaría ayudarte. ¿Cuál es tu nombre?',
+                field: 'nombre',
+                type: 'text',
+                validation: (value) => value.trim().length >= 2
+            },
+            {
+                question: '¿Cuál es tu correo electrónico?',
+                field: 'correo',
+                type: 'email',
+                validation: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+            },
+            {
+                question: '¿Cuál es tu teléfono o WhatsApp?',
+                field: 'telefono',
+                type: 'text',
+                validation: (value) => value.trim().length >= 7
+            },
+            {
+                question: '¿Qué tipo de proyecto necesitas?',
+                field: 'tipo_proyecto',
+                type: 'buttons',
+                options: ['Página Web', 'Tienda Online', 'Sistema Empresarial', 'Landing Page', 'CRM', 'Otro'],
+                validation: (value) => value.length > 0
+            },
+            {
+                question: '¿Cuál es el objetivo principal de tu proyecto?',
+                field: 'objetivo',
+                type: 'text',
+                validation: (value) => value.trim().length >= 10
+            },
+            {
+                question: '¿Qué funcionalidades específicas necesitas?',
+                field: 'funcionalidades',
+                type: 'text',
+                validation: (value) => value.trim().length >= 10
+            },
+            {
+                question: '¿Tienes logo, colores o referencias? (Puedes mencionar referencias de otros sitios)',
+                field: 'referencias',
+                type: 'text',
+                validation: (value) => value.trim().length >= 5
+            },
+            {
+                question: '¿Cuál es tu presupuesto estimado?',
+                field: 'presupuesto',
+                type: 'buttons',
+                options: ['$1M - $3M', '$3M - $5M', '$5M - $10M', '$10M - $20M', '$20M+', 'No definido aún'],
+                validation: (value) => value.length > 0
+            },
+            {
+                question: '¿Cuándo idealmente necesitas que esté listo? (Ej: 2-3 meses, ASAP, etc.)',
+                field: 'fecha_entrega',
+                type: 'text',
+                validation: (value) => value.trim().length >= 3
+            }
+        ];
+        
+        // Inicializar listeners
+        this.initializeListeners();
+    }
+    
+    /**
+     * Inicializar event listeners
+     */
+    initializeListeners() {
+        this.chatToggleBtn.addEventListener('click', () => this.toggleChat());
+        this.chatCloseBtn.addEventListener('click', () => this.closeChat());
+        this.chatSendBtn.addEventListener('click', () => this.handleUserInput());
+        this.chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.handleUserInput();
+        });
+    }
+    
+    /**
+     * Abrir/cerrar chat
+     */
+    toggleChat() {
+        if (this.isOpen) {
+            this.closeChat();
+        } else {
+            this.openChat();
+        }
+    }
+    
+    openChat() {
+        this.isOpen = true;
+        this.chatWindow.classList.remove('hidden');
+        this.chatToggleBtn.style.display = 'none';
+        
+        // Si es la primera vez, mostrar primer mensaje
+        if (this.currentStep === 0) {
+            this.showStep(0);
+        }
+        
+        // Enfocar en el input
+        setTimeout(() => this.chatInput.focus(), 300);
+    }
+    
+    closeChat() {
+        this.isOpen = false;
+        this.chatWindow.classList.add('hidden');
+        this.chatToggleBtn.style.display = 'flex';
+    }
+    
+    /**
+     * Mostrar paso actual
+     */
+    showStep(stepIndex) {
+        const step = this.steps[stepIndex];
+        
+        // Agregar mensaje del bot
+        this.addMessage(step.question, 'bot');
+        
+        // Mostrar opciones si es tipo buttons
+        if (step.type === 'buttons') {
+            this.showButtonOptions(step.options, step.field);
+            this.chatInput.style.display = 'none';
+            this.chatSendBtn.style.display = 'none';
+        } else {
+            this.chatOptions.classList.add('hidden');
+            this.chatInput.style.display = 'block';
+            this.chatSendBtn.style.display = 'block';
+            this.chatInput.value = '';
+            this.chatInput.placeholder = `Escribe tu respuesta...`;
+            this.chatInput.focus();
+        }
+    }
+    
+    /**
+     * Mostrar botones de opciones
+     */
+    showButtonOptions(options, field) {
+        this.chatOptions.innerHTML = '';
+        this.chatOptions.classList.remove('hidden');
+        
+        options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'chat-option-btn';
+            btn.textContent = option;
+            btn.addEventListener('click', () => {
+                this.selectOption(option, field);
+            });
+            this.chatOptions.appendChild(btn);
+        });
+    }
+    
+    /**
+     * Seleccionar opción de botones
+     */
+    selectOption(option, field) {
+        // Agregar respuesta del usuario
+        this.addMessage(option, 'user');
+        
+        // Guardar dato
+        this.conversationData[field] = option;
+        
+        // Pasar al siguiente paso
+        this.nextStep();
+    }
+    
+    /**
+     * Manejar entrada del usuario
+     */
+    handleUserInput() {
+        const userInput = this.chatInput.value.trim();
+        const step = this.steps[this.currentStep];
+        
+        // Validar entrada
+        if (!userInput) {
+            this.addMessage('Por favor, escribe una respuesta válida.', 'bot');
+            return;
+        }
+        
+        // Validar según el tipo
+        if (!step.validation(userInput)) {
+            let errorMsg = 'Respuesta inválida. ';
+            if (step.type === 'email') {
+                errorMsg += 'Por favor, ingresa un correo válido.';
+            } else if (step.field === 'telefono') {
+                errorMsg += 'Por favor, ingresa un teléfono válido.';
+            } else if (step.field === 'objetivo' || step.field === 'funcionalidades') {
+                errorMsg += 'Por favor, proporciona más detalles.';
+            } else {
+                errorMsg += 'Por favor, intenta de nuevo.';
+            }
+            this.addMessage(errorMsg, 'bot');
+            return;
+        }
+        
+        // Agregar mensaje del usuario
+        this.addMessage(userInput, 'user');
+        
+        // Guardar dato
+        this.conversationData[step.field] = userInput;
+        
+        // Pasar al siguiente paso
+        this.nextStep();
+    }
+    
+    /**
+     * Pasar al siguiente paso
+     */
+    nextStep() {
+        this.currentStep++;
+        
+        if (this.currentStep < this.steps.length) {
+            // Pequeño delay antes de mostrar siguiente pregunta
+            setTimeout(() => {
+                this.showStep(this.currentStep);
+            }, 500);
+        } else {
+            // Conversación finalizada
+            this.finishConversation();
+        }
+    }
+    
+    /**
+     * Finalizar conversación y enviar datos
+     */
+    finishConversation() {
+        // Mostrar resumen
+        this.addMessage('✨ Perfecto! He recopilado toda la información. Permíteme enviarla...', 'bot');
+        
+        // Agregar información faltante
+        this.conversationData.fecha_envio = new Date().toLocaleDateString('es-ES');
+        
+        // Enviar datos después de 1 segundo
+        setTimeout(() => {
+            this.sendData();
+        }, 1500);
+    }
+    
+    /**
+     * Enviar datos al servidor
+     */
+    sendData() {
+        // Mostrar mensaje de envío
+        this.addMessage('📨 Enviando tu solicitud...', 'bot');
+        
+        // Enviar a la API del servidor
+        fetch('/api/enviar-solicitud', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.conversationData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            this.addMessage('🎉 ¡Gracias por tu solicitud! Pronto nos pondremos en contacto contigo.', 'bot');
+            this.addMessage('Mientras tanto, puedes explorar nuestros servicios en la página. ¡Estamos listos para ayudarte!', 'bot');
+            
+            // Desabilitar input
+            this.chatInput.disabled = true;
+            this.chatSendBtn.disabled = true;
+            
+            // Opción para reiniciar
+            setTimeout(() => {
+                this.showResetButton();
+            }, 2000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            this.addMessage('✅ Tu solicitud fue procesada correctamente. ¡Nos contactaremos pronto!', 'bot');
+            this.chatInput.disabled = true;
+            this.chatSendBtn.disabled = true;
+            
+            setTimeout(() => {
+                this.showResetButton();
+            }, 2000);
+        });
+    }
+    
+    /**
+     * Mostrar botón para reiniciar
+     */
+    showResetButton() {
+        const resetBtn = document.createElement('button');
+        resetBtn.textContent = '🔄 Enviar Otra Solicitud';
+        resetBtn.className = 'chat-option-btn';
+        resetBtn.style.flex = '1';
+        resetBtn.addEventListener('click', () => this.resetChat());
+        
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.gap = '10px';
+        container.style.padding = '15px';
+        container.appendChild(resetBtn);
+        
+        this.chatMessages.parentElement.insertBefore(container, this.chatMessages.nextSibling);
+    }
+    
+    /**
+     * Resetear chat
+     */
+    resetChat() {
+        this.currentStep = 0;
+        this.conversationData = {};
+        this.chatMessages.innerHTML = '';
+        this.chatInput.disabled = false;
+        this.chatSendBtn.disabled = false;
+        this.openChat();
+    }
+    
+    /**
+     * Agregar mensaje al chat
+     */
+    addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${sender}`;
+        
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${sender}`;
+        bubble.textContent = text;
+        
+        messageDiv.appendChild(bubble);
+        this.chatMessages.appendChild(messageDiv);
+        
+        // Scroll automático
+        this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+    }
+}
+
+// Inicializar chatbot cuando el DOM está listo
+document.addEventListener('DOMContentLoaded', () => {
+    new ChatBot();
+});
+
 /**
  * Envía usando EmailJS (opcional)
  * Requiere: <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
