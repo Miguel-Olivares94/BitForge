@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const { Resend } = require('resend');
 const cors = require('cors');
@@ -9,7 +10,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname)); // Servir archivos estáticos (HTML, CSS, JS)
+
+// Servir archivos estáticos desde el directorio actual
+app.use(express.static(path.join(__dirname)));
 
 // DEBUG: Mostrar variables cargadas
 console.log('📋 VARIABLES CARGADAS:');
@@ -110,7 +113,7 @@ app.post('/api/enviar-solicitud', async (req, res) => {
 
 // Ruta raíz - Servir el HTML principal
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Iniciar servidor
